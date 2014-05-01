@@ -1,0 +1,1 @@
+Portal nao abriu

@@ -1,0 +1,69 @@
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laborat&oacute;rio 06b</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 06b - Fruit Crush Saga - Part II</h2>
+
+<b> <em> Prazo de entrega: </em> </b> 28/04/2014 às 13h59min59s <br>
+<b> <em> Peso: </em> </b> 4 <br> <br> <hr> <br>
+
+<p align="justify">
+Sua segunda tarefa para o projeto Fruit Crush Saga é adicionar à tarefa anterior uma nova funcionalidade: após uma jogada, todas as frutas localizadas acima das posições diretamente afetadas devem "cair" para as posições abaixo (efeito gravidade). Outra modificação a ser realizada é que agora seu programa deve considerar que serão realizadas <tt>J</tt> jogadas, <tt> J &ge; 2</tt>, e não apenas uma como na tarefa anterior. A animação abaixo mostra o efeito gravidade após duas jogas consecutivas.</p>
+
+<ul><ul>
+<img src="motion.gif">
+</ul></ul><br>
+
+<p align="justify">
+Como o programador responsável pela funcionalidade de inserir novas frutas do tabuleiro não terminou sua tarefa ainda, você deve considerar que não entram novas frutas no tabuleiro após uma jogada e, desta forma, poderão existir posições do tabuleiro em branco após uma ou mais jogadas. Estas posições devem ser demarcadas pelo caractere ponto ("."). Considere que uma jogada em uma posição sem frutas não contabiliza pontos nem altera o tabuleiro.</p>
+
+<p align="justify">
+As definições, as regras para as jogadas e a pontuação do Fruit Crush Saga continuam as mesmas da tarefa passada, disponível <a href="https://susy.ic.unicamp.br:9999/mc102qrst/06a/enunc.html">neste link</a>. Para esta tarefa, considere que:</p>
+<ul>
+<li>Uma jogada só é realizada após a descida das frutas localizadas acima daquelas diretamente afetadas pela jogada anterior.</li>
+<li>Considere o exemplo abaixo, no qual escolhemos como primeira jogada a linha 7 e coluna 5, que contém uma melancia. Assim, são diretamente afetadas por esta jogada a melancia adjacente à esquerda desta posição, a melancia adjacente acima desta posição, e as duas melancias adjacentes à direita desta posição, como mostra em destaque a figura abaixo à esquerda. Após a remoção das frutas diretamente afetadas, a descida das frutas e a troca de espaços vazios por pontos, o tabuleiro deve ficar com a configuração dada pela figura abaixo à direita.
+<ul><table cellpadding='0' cellspacing='0' border='0'>
+<tr><td><img src="gradeadjpb.jpg"></td><td width="100"></td><td><img src="gradeadj1j.jpg"></td></tr>
+</table><br><br></ul></li>
+<li>Considere agora uma jogada na posição linha 2 e coluna 5, onde não existe nenhuma fruta. Esta jogada não afeta nenhuma posição do tabuleiro, e a pontuação desta jogada deve ser 0.</li>
+<li>Ainda para o exemplo dado acima, suponha que a próxima jogada seja a posição linha 7 e coluna 8, onde existe uma pera. Assim, as duas peras adjacentes à esquerda serão diretamente afetadas pela jogada, como mostra em destaque a figura abaixo à esquerda. Após a remoção das frutas diretamente afetadas, a descida das frutas e a troca de espaços vazios por pontos, o tabuleiro deve ficar com a configuração dada pela figura abaixo à direita.
+<ul><table cellpadding='0' cellspacing='0' border='0'>
+<tr><td><img src="gradeadjpb2.jpg"></td><td width="100"></td><td><img src="gradeadj2j.jpg"></td></tr>
+</table></ul><br><br></li>
+</ul>
+
+
+<h3> Entrada </h3>
+<ul>
+<li>O programa recebe três inteiros, <tt>M N J</tt>, indicando respectivamente a quantidade de linhas do tabuleiro, a quantidade de colunas do tabuleiro e a quantidade de jogadas, com <tt>1 &le; M,N &le; 50</tt> e <tt> 2 &le; J &le; 20</tt>.</li>
+<li>Cada uma das <tt>M</tt> linhas seguintes contêm <tt>N</tt> dígitos (inteiros entre 0 e 9), representando o tipo de fruta que ocupa aquela posição no tabuleiro.</li>
+<li>As próximas <tt>J</tt> linhas contêm dois inteiros <tt>X Y</tt> cada, indicando respectivamente a posição da linha e da coluna daquela jogada, com <tt>1 &le; X &le; M</tt> e <tt>1 &le; Y &le; N</tt>.</li> 
+</ul>
+<h3>Saída</h3>
+<ul>
+<li>Seu programa deve imprimir primeiramente a pontuação obtida ao final das <tt>J</tt> jogadas, no seguinte formato: "<tt>Score: Z</tt>". A partir da próxima linha, seu programa deve imprimir o tabuleiro do jogo ao final das <tt>J</tt> jogadas, trocando as posições em branco por um ponto '<tt>.</tt>'.</li>
+</ul>
+<h3>Exemplos</h3>
+<table cellpadding='2' cellspacing='0' border='1'>
+<tr align='center'><td width='15px'><b><tt>#</tt></b></td><td width='250px'><b><tt>Entrada</tt></b></td><td width='250px'><b><tt>Sa&iacute;da</tt></b></td></tr>
+<tr align='left' valign='top'><td>1</td><td><tt>10 10 2<br>4852390167<br>6701767489<br>2349154325<br>5762438901<br>9038621766<br>6150799328<br>8437777941<br>0591248523<br>6104324735<br>8928501980<br>7 5<br>7 8</tt></td><td><tt>Score: 34<br>485.....67<br>6702...189<br>2341390425<br>5769767301<br>9032154966<br>6158438728<br>8430621341<br>0591248523<br>6104324735<br>8928501980</tt></td></tr>
+<tr align='left' valign='top'><td>2</td><td><tt>20 15 6<br>302113223110333<br>213221003112002<br>202110032013032<br>323201002311211<br>001212211112021<br>313200000212313<br>013200022213001<br>133113113112320<br>331211310113033<br>212120031311103<br>132313001010020<br>301213212312012<br>031223223311333<br>323000321111022<br>221013332211310<br>212113111213322<br>210311300112220<br>201022333112010<br>231332022111313<br>333031331213000<br>6 1<br>1 11<br>7 9<br>14 5<br>14 10<br>16 5</tt></td><td><tt>Score: 480<br>.02...2....0333<br>313..302...2002<br>2021.1003..3032<br>2232.00331.1211<br>3011112020.2021<br>0132220123.2313<br>0132100011.3001<br>1332001102.2320<br>3312133131.3033<br>2121010301.1103<br>1322000013.0020<br>3011132110.2012<br>0313132223.1333<br>3232233233.1022<br>2212133322.1310<br>2120131112.3322<br>2103213001.2220<br>2010223331.2010<br>2313320221.1313<br>3330313312.3000</tt></td></tr>
+<tr align='left' valign='top'><td>3</td><td><tt>10 30 12<br>001110221211001212000121120200<br>110221211112210112220202102202<br>211010222000210002021102012012<br>101210000001202210220000210021<br>200221002022110202022002201201<br>112102101000021212211202122020<br>201102112220002121020210102112<br>111002220220020000200202012021<br>020201110202222022110110022102<br>012000221212211111110222011002<br>3 1<br>1 27<br>6 11<br>7 5<br>1 29<br>6 24<br>5 30<br>7 20<br>10 23<br>2 4<br>6 16<br>1 6
+</tt></td><td><tt>Score: 81<br>.01...221....01.120.0...12.2..<br>0101.1211211010.1220012.1022..<br>1110.0222112210.0202120.01201.<br>1012.0000000202210220101210022<br>2002.1002001210102022002201202<br>112112101022121012221002122020<br>201122112220002121010200102112<br>111012220220020000200210012021<br>020211110202222022110202022102<br>012020221212211111110110011002</tt></td></tr>
+</table><br>
+<center><h2>Continua...</h2></center>
+</body></html>

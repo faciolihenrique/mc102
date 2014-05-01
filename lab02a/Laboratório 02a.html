@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laboratório 02a</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 02a - INSS e IRPF </h2>
+
+<b> <em> Prazo de entrega: </em> </b> 17/03/2014 às 23h59min59s <br>
+<b> <em> Peso: </em> </b> 1 <br> <br> <hr> <br>
+
+<p> Todo ano, seu tio Zé reclama sobre os impostos cobrados pelo governo. A
+contribuição ao INSS, o Instituto Nacional do Seguro Social, e o desconto do
+IRPF, o Imposto de Renda Pessoa Física, são seus principais alvos. Esse ano não
+está sendo diferente. Seu tio sempre desconfiou do governo e acha que tudo o que
+ele quer é tirar seu dinheiro. Com todas as regras existentes para os cálculos
+dos descontos, seu tio sempre quer ter certeza de que está sendo cobrado
+corretamente. </p>
+
+<p> Há alguns anos, seu tio pede a sua ajuda para calcular e recalcular o valor
+do INSS e do IRPF que vão ser descontados mensalmente do salário dele, até que a
+desconfiança dele seja satisfeita. Acontece que esse ano as coisas mudaram na
+família e, além de começar a pedir para você formatar o computador dele e
+arrumar a impressora que está constantemente com defeito, tio Zé quer que você
+faça um programa para realizar esses cálculos. Dessa forma, ele vai deixar de
+perder tanto tempo, já que ele confia em você e confia que seu programa fará os
+cálculos corretamente de uma só vez. </p>
+
+<p> O desconto do IRPF não é feito diretamente sobre o salário mensal. A base
+de cálculo é o salário mensal menos o valor da contribuição ao INSS e menos R$
+179,71 por dependente legal. A
+<a target="_blank"
+   href="http://www.previdencia.gov.br/inicial-central-de-servicos-ao-segurado-formas-de-contribuicao-empregado/">tabela
+        vigente</a> com as porcentagens para o cálculo do valor da contribuição
+ao INSS é dada abaixo. <br>
+
+<center> <table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <th> Salário (R$) </th>
+    <th> Alíquota para fins de recolhimento ao INSS (%) </th>
+  </tr>
+  <tr> <td>até 1317,07</td> <td align="center">8,0</td> </tr>
+  <tr> <td>de 1317,08 até 2195,12</td> <td align="center">9,0</td> </tr>
+  <tr> <td>de 2195,13 até 4390,24</td> <td align="center">11,0</td> </tr>
+  <tr> <td>acima de 4390,24</td> <td align="center">R$ 482,93 (fixo)</td> </tr>
+</table> </center> </p>
+
+<p> Uma vez encontrada a base de cálculo, pode-se finalmente calcular o valor do
+IRPF que será descontado. A <a target="_blank" 
+   href="http://www.receita.fazenda.gov.br/Aliquotas/ContribFont2012a2015.htm">tabela
+   vigente</a> com as porcentagens a serem cobradas de IRPF é dada abaixo. <br>
+
+<center>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+   <th> Base de cálculo mensal (R$) </th>
+   <th> Alíquota (%) </th>
+  </tr>
+  <tr> <td> até 1787,77             </td>  <td align="center"> -    </td>  </tr>
+  <tr> <td> de 1787,78 até 2679,29 </td>  <td align="center"> 7,5  </td>  </tr> 
+  <tr> <td> de 2679,30 até 3572,43 </td>  <td align="center"> 15,0 </td>  </tr>
+  <tr> <td> de 3572,44 até 4463,81 </td>  <td align="center"> 22,5 </td>  </tr>
+  <tr> <td> acima de 4463,81        </td>  <td align="center"> 27,5 </td>  </tr>
+</table>
+</center> <br> </p>
+
+<p> Calcular o valor do INSS e do IRPF a ser descontado quando já se sabe quais
+são as porcentagens a serem cobradas é muito simples. Desconfiado da facilidade
+por trás do pedido, você descobriu que seu tio quer um programa genérico que,
+dado qualquer salário e número de dependentes, calcule o valor a ser descontado
+mensalmente pelo INSS, a base de cálculo para o IRPF e o valor que é pago de
+IRPF. Dessa forma, ele vai poder ajudar seus amigos, também muito desconfiados.
+</p>
+
+<p> Você já sabe, devido aos seus anos de experiência com tio Zé, que o sistema
+do Imposto de Renda no Brasil é <i>progressivo</i>, isto é, uma alíquota só
+incide sobre a diferença que ultrapassa sua faixa. Por exemplo, suponha que uma
+pessoa receba um salário de R$ 3700,00 e possua um dependente legal.
+Descontados os R$ 407,00 do INSS (11% de R$ 3700,00) e os R$ 179,71 do
+dependente, a base de cálculo do IRPF é de R$ 3113,29. Essa base está na
+terceira faixa da tabela acima. No entanto, apenas sobre R$ 434,00 (= R$ 3113,29
+- R$ 2679,29) a alíquota de 15% é cobrada. Dos R$ 2679,29 restantes ainda não
+tributados, é cobrada a alíquota de 7,5% apenas sobre R$ 891,52 (= R$ 2679,29 -
+R$ 1787,77). Sobre os R$ 1787,77 restantes, nada é cobrado (primeira faixa).
+Assim, essa pessoa deverá pagar R$ 407,00 ao INSS e R$ 65,10 (15% de R$ 434,00)
++ R$ 66,86 (7,5% de R$ 891,52) = R$ 131,96 de IRPF, mensalmente. </p>
+
+
+<h3> Entrada </h3>
+
+<ul>
+  <li> A entrada é composta de dois valores <tt>S</tt> e <tt>D</tt> separados
+  por um espaço que indicam, respectivamente, o salário e o número de
+  dependentes de uma pessoa, onde <tt>724.00 &le; S &le; 1000000.00</tt> e 
+  <tt>0 &le; D &le; 100.</tt> </li>
+</ul>
+
+<h3> Saída </h3>
+
+<ul>
+  <li> Seu programa deverá imprimir três linhas indicando o valor que será
+  cobrado pelo INSS, o valor da base de cálculo para o IRPF e o valor que será
+  cobrado de IRPF, conforme mostrado nos exemplos. Tais valores devem ser
+  impressos com duas casas decimais cada um. </li>
+</ul>
+
+
+<h3> Exemplos </h3>
+
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> # </em></b> </td>
+      <td> <b><em> Entrada </em></b> </td>
+      <td> <b><em> Saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> 1 </td>
+      <td> 3700.00 1 </td>
+      <td> 
+        INSS: R$ 407.00<br>
+        Base: R$ 3113.29<br>
+        IRPF: R$ 131.96<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td> 2 </td>
+      <td> 3572.50 2 </td>
+      <td>
+        INSS: R$ 392.98<br>
+        Base: R$ 2820.11<br>
+        IRPF: R$ 87.99<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td> 3 </td>
+      <td> 8999.00 4 </td>
+      <td>
+        INSS: R$ 482.93<br>
+        Base: R$ 7797.23<br>
+        IRPF: R$ 1318.09<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br> <br>
+
+</body>
+
+</html>
+

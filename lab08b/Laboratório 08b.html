@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laboratório 08b</title>
+</head>
+  
+<body style="text-align: justify"> 
+
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 08b - Processamento de imagens </h2>
+
+<b> <em> Prazo de entrega: </em> </b> 05/05/2014 às 13h59min59s <br>
+<b> <em> Peso: </em> </b> 6 <br> <br> <hr> <br>
+
+<p align = "justify">
+Uma imagem digital é uma representação numérica de uma imagem bidimensional, de forma a permitir seu armazenamento, transferência e processamento. Processamento de imagens é um tipo de processamento de dados em que tanto a entrada quanto a saída são imagens. </p>
+
+<p align = "justify">
+Podemos representar uma imagem digital em forma de matriz, em que cada um de
+seus elementos representa a intensidade de cor em um ponto (pixel) da imagem.
+Assim, seja <tt>f</tt> uma imagem digital qualquer, dizemos que o pixel na
+posição <tt>(x,y)</tt> tem intensidade <tt>f(x,y)</tt>. Considerando imagens em
+tons de cinza, o valor de cada elemento da matriz representa uma intensidade de
+cinza. Quanto maior a intensidade, mais clara é a cor representada. Desta forma,
+a intensidade máxima representa a cor branca, enquanto a intensidade mínima
+representa a cor preta. <br></p>
+
+<p align = "justify"> Neste laboratório, você deverá implementar 4 funções de processamento de imagem. Para cada
+função, tanto a entrada quanto a saída serão imagens no formato <a href="http://en.wikipedia.org/wiki/Portable_graymap">PGM</a>. O formato
+PGM representa imagens em tons de cinza de forma matricial, em que a intensidade
+de cada pixel está no intervalo <tt>[0..MaxV]</tt>, onde <tt>MaxV</tt> é
+intensidade máxima especificada no arquivo, ou seja, a intensidade que
+representa a cor branco. Por exemplo, para <tt>MaxV = 10</tt>, os pixels da
+imagem podem ter a cor preta, com intensidade <tt>0</tt>, a cor branca, com
+intensidade <tt>10</tt>, e mais <tt>9</tt> tons intermediários de cinza,
+representados pelas intensidades no intervalo <tt>[1..9]</tt>. O valor máximo
+para <tt>MaxV</tt> permitido no formato PGM é <tt>255</tt>.</p>
+
+<p align = "justify"> Os arquivos de casos de testes de entrada (*.in) e de saída (*.res) podem ser visualizados normalmente como imagens no ambiente Linux (com um clique duplo no arquivo ou com um editor de imagens como o Gimp, por exemplo). </p>
+
+<p align = "justify">Disponibilizamos um <a href="aux/lab08b.c">código</a> (clique para acessar) que possui as seguintes funções, já implementadas:</p>
+<p><tt>int ler_pgm(int img[][400],int *W, int *H, int *MaxV, int *F,
+  double *Px, double *Py);</tt></p>
+<p>Esta função faz a leitura de uma imagem em formato PGM. A leitura é
+feita a partir da entrada padrão.</p>
+<p><tt>void escrever_pgm(int img[][400], int W, int H, int MaxV);</tt></p>
+<p>Esta função faz a escrita de uma imagem em formato PGM. A escrita é feita na saída
+padrão.</p>
+<p><tt>int main(); </tt></p>
+  <p> Função principal que controla a escolha do filtro que será aplicado
+em cada execução do programa.</p>
+<p align = "justify">Você deverá fazer a implementação das funções de processamento de imagens utilizando os esboços das
+funções disponíveis no mesmo código fonte. Você não deve modificar as funções já existentes. </p>
+<p align = "justify">Para este problema, um arquivo PGM encontra-se no seguinte formato:</p>
+<ul>
+  <li>A primeira linha contém a string <span style="font-family:
+  monospace;">"P2"</span>, que é o identificador do formato;</li>
+  <li>A segunda linha do arquivo PGM conterá um comentário com um valor inteiro
+<span style="font-family: monospace;">F</span>, que indica qual a função deve ser
+executada, e dois valores reais <span style="font-family: monospace;">Px e Py</span>,
+que indicam os parâmetros a serem passados para o filtro (caso seja
+necessário);</li>
+  <li>A terceira linha contém três números <tt>W</tt>, <tt>H</tt> e <tt>MaxV</tt>
+que indicam, respectivamente, a largura, a altura e a intensidade máxima
+da imagem, ou seja, a intensidade que representa a cor branca;</li>
+  <li>O restante do arquivo contém <span style="font-family: monospace;">W*H</span>
+números inteiros <tt>I</tt>, <tt>0 ≤ I ≤ MaxV</tt>, separados por
+espaços em branco e/ou quebras de linha. Estes números representam a
+matriz de intensidades da imagem.</li>
+</ul>
+<p align = "justify">A seguir é mostrado um exemplo de arquivo PGM. </p>
+<tt>
+  P2<br>
+  # 4 0.2 0.53<br>
+  4 5 255<br>
+  100 200 100 200<br>
+  50 160 50 160<br>
+  20 130 20 130<br>
+  10 110 10 110<br>
+  80 100 0 25<br>
+</tt>
+
+<p align = "justify"> A seguir são explicadas as quatro funções que devem ser implementadas.</p>
+    <h3>Função 1: Negativo</h3>
+    <tt>void negativo(int img[][400], int W, int H, int MaxV); </tt> <br>
+    <p align = "justify"> Esta função inverte as intensidades de cor da imagem. Isto é, as intensidades de cor mais escuras ficam claras e as intensidades claras ficam escuras.</p> 
+        <i>Exemplo 1</i>: Negativo
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> Imagem de entrada </em></b> </td>
+      <td> <b><em> Imagem de saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> P2<br>
+           # 1<br>
+           5 5 10<br>
+           1 9 10 2 6<br>
+           1 8 7 2 5<br>
+           4 9 10 10 2<br>
+           0 0 1 2 3<br>
+           0 10 0 10 10<br>
+     </td>
+      <td> P2<br>
+           5 5 10<br>
+           9 1 0 8 4<br>
+           9 2 3 8 5<br>
+           6 1 0 0 8<br>
+           10 10 9 8 7<br>
+           10 0 10 0 0<br>
+ </td>
+    </tr>
+  </tbody>
+</table>    
+    <br>
+    <br>
+    <i>Visualização</i>:
+    <table border="1">
+      <tbody>
+        <tr>
+          <th>Imagem de entrada</th>
+          <th>Imagem de saída</th>
+        </tr>
+        <tr>
+          <td> <img src="f1i.png" > </td>
+          <td> <img src="f1o.png" > </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Função 2: Rotação em 180 graus</h3>
+    <tt>void rotacao180(int img[][400], int W, int H); </tt> <br>
+    <p align = "justify"> Esta função efetua uma rotação de 180 graus na imagem. </p>
+        <i>Exemplo 2</i>: Rotação 180 graus
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> Imagem de entrada </em></b> </td>
+      <td> <b><em> Imagem de saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> P2<br>
+           # 2<br>
+           5 5 10<br>
+           1 9 10 2 6<br>
+           1 8 7 2 5<br>
+           4 9 10 10 2<br>
+           0 0 1 2 3<br>
+           0 10 0 10 10<br>
+     </td>
+      <td> P2<br>
+           5 5 10<br>
+           10 10 0 10 0<br>
+           3 2 1 0 0<br>
+           2 10 10 9 4<br>
+           5 2 7 8 1<br>
+           6 2 10 9 1<br>
+ </td>
+    </tr>
+  </tbody>
+</table>    
+    <br>
+    <br>
+    <i>Visualização</i>:
+    <table border="1">
+      <tbody>
+        <tr>
+          <th>Imagem de entrada</th>
+          <th>Imagem de saída</th>
+        </tr>
+        <tr>
+          <td> <img src="f2i.png" > </td>
+          <td> <img src="f2o.png" > </td>
+        </tr>
+      </tbody>
+    </table>
+
+<h3>Função 3: Detecção de bordas</h3>
+    <tt>void detectaBorda(int img[][400], int W, int H, int MaxV); </tt> <br>
+    <p align="justify">Para este problema, definimos a vizinhança de um pixel <tt>(x,y)</tt> como o conjunto de pixels pertencentes ao quadro <tt>3x3</tt> que tem centro em <tt>(x,y)</tt>.</p>
+<div align="center"><img src="vizinho.png" width=400, heigth=400></div>
+
+    <p align = "justify"> A função de detecção de borda é usada para realçar as bordas dos objetos presentes na imagem. Ela é feita por meio de um filtro representado pela matriz abaixo. </p>
+<div align="center"><img src="passaalta.jpg" width=120, heigth=120></div><br>
+
+Dado um pixel na posição (x,y), cuja intensidade atual é <tt>f(x,y)</tt>, o novo valor de sua intensidade, <tt>f'(x,y)</tt>, se dá pela soma da multiplicação "ponto-a-ponto" entre a região de vizinhança de <tt>(x,y)</tt> e o filtro dado acima. Por exemplo, suponha que queremos utilizar o filtro de detecção de borda no pixel <tt>P<sub>1</sub></tt> na posição <tt>(9, 21)</tt> da imagem de entrada. </p>
+<div align="center"><img src="ponto.png" width=400, heigth=400></div>
+<p align = "justify"> O valor de intensidade no ponto <tt>P'<sub>1</sub></tt> na posição <tt>(9, 21)</tt> da imagem resultante após o filtro de detecção de bordas é:</p>
+<tt>f'(9, 21) = (-1 * f(8, 20)) + (-4 * f(9, 20)) + (-1 * f(10, 20)) + (-4 * f(8, 21)) + (20 * f(9, 21)) + (-4 * f(10, 21)) + (-1 * f(8, 22)) + (-4 * f(9, 22)) + (-1 * f(10, 22))<br><br>
+f'(9, 21) = -31 - 4 * 9 - 13 - 4 * 16 + 20 * 25 - 4 * 19 - 20 - 4 * 14 - 3<br><br>
+f'(9, 21) = 201</tt><br>
+
+<p align="justify"> Considerando o ponto <tt>P<sub>2</sub></tt> na posição <tt>(10, 21)</tt> da imagem de entrada, o valor de intensidade do ponto <tt>P'<sub>2</sub></tt> na posição <tt>(10, 21)</tt> da imagem resultante após o filtro de detecção de bordas é:</p>
+<tt>f'(10, 21) = (-1 * f(9, 20)) + (-4 * f(10, 20)) + (-1 * f(11, 20)) + (-4 * f(9, 21)) + (20 * f(10, 21)) + (-4 * f(11, 21)) + (-1 * f(9, 22)) + (-4 * f(10, 22)) + (-1 * f(11, 22))<br><br>
+f'(10, 21) = -9 - 4 * 13 - 43 - 4 * 25 + 20 * 19 - 4 * 88 - 14 - 4 * 3 - 50<br><br>
+f'(10, 21) = -252 &rArr; 0</tt><br><br>
+Observações:
+<ul>
+<li> Para a detecção de bordas, considere que os pontos de borda da imagem não possuem vizinhança e nenhuma operação deve ser realizada sobre eles, isto é, os valores destes pontos devem ser os mesmos no resultado final;</li>
+<li> Lembre-se que um pixel não pode ter valor inferior a <tt>0</tt> e nem valor superior a <tt>MaxV</tt>. Portanto, se o resultado de um ponto for menor que <tt>0</tt>, ele deve receber o valor <tt>0</tt>. Da mesma forma, se o resultado for maior que <tt>MaxV</tt>, ele deve receber o valor <tt>MaxV</tt>. No exemplo anterior, o ponto <tt>P'<sub>2</sub></tt> na posição <tt>(10, 21)</tt> da imagem resultante deverá receber o valor <tt>0</tt>, e não <tt>-252</tt>.</li>
+</ul>
+
+    <i>Exemplo 3</i>: Detecção de bordas
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> Imagem de entrada </em></b> </td>
+      <td> <b><em> Imagem de saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> P2<br>
+	   # 3<br>
+	   10 10 10<br>
+	   6 2 5 10 10 10 7 8 4 8<br>
+	   8 8 9 10 10 10 4 3 10 1<br>
+	   10 2 0 10 10 10 5 4 4 7<br>
+	   10 3 5 10 10 10 7 2 8 7<br>
+	   10 10 10 10 10 10 10 10 10 7<br>
+	   8 10 6 10 10 10 5 9 7 4<br>
+	   5 2 3 10 10 10 4 2 9 6<br>
+	   3 4 0 10 10 10 3 4 0 4<br>
+	   0 3 3 10 10 10 10 3 1 5<br>
+	   8 1 3 10 10 10 10 3 7 6<br>
+
+     </td>
+      <td> P2<br>
+10 10 10<br>
+6 2 5 10 10 10 7 8 4 8<br>
+8 10 10 10 0 10 0 0 0 1<br>
+10 10 10 10 0 10 0 0 0 7<br>
+10 10 10 10 0 8 10 10 10 7<br>
+10 10 10 9 0 8 10 10 10 7<br>
+8 10 10 10 0 10 10 10 10 4<br>
+5 0 0 10 0 10 0 0 0 6<br>
+3 10 0 10 0 10 0 10 10 4<br>
+0 10 0 10 0 10 0 10 10 5<br>
+8 1 3 10 10 10 10 3 7 6<br>
+ </td>
+    </tr>
+  </tbody>
+</table>    
+    <br>
+    <br>
+    <i>Visualização</i>:
+    <table border="1">
+      <tbody>
+        <tr>
+          <th>Imagem de entrada</th>
+          <th>Imagem de saída</th>
+        </tr>
+        <tr>
+          <td> <img src="arqBorda.jpg"> </td>
+          <td> <img src="borda.jpg"> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Função 4: Cisalhamento</h3>
+    <tt>void cisalhamento(int img[][400], int W, int H, double Px, double Py); </tt> <br>
+    <p align = "justify"> A função de cisalhamento altera as coordenadas dos pontos de acordo com uma função de direção, de modo a causar uma deformação dos objetos presentes na imagem. Em um cisalhamento, o valor da intensidade do ponto <tt>(x, y)</tt> é transferido para um ponto <tt>(x', y')</tt> de acordo com as seguintes equações:</p>
+<tt>
+x' = x + (Px * y)<br><br>
+y' = y + (Py * x)
+</tt><br>
+    <p aligh = "justify"> onde os valores de <tt>Px</tt> e <tt>Py</tt> são os fatores de cisalhamento no eixo <tt>x</tt> e <tt>y</tt>, respectivamente, com <tt>0 ≤ Px, Py &lt; 1 </tt>. Por exemplo, supondo que <tt>Px = 0.2</tt> e <tt>Py = 0.15</tt>, a intensidade do ponto <tt>P</tt> que está na posição <tt>(10, 20)</tt> deve ser transferida para o ponto <tt>P'</tt> de posição <tt>(x', y')</tt> onde:</p>
+<tt>
+x' = 10 + 0.2 * 20 = 10 + 4 = 14<br><br>
+y' = 20 + 0.15 * 10 = 20 + 1.5 = 21.5 &rArr; 21<br><br>
+</tt>
+
+Note que é possível que o novo valor das coordenadas não seja inteiro. Nesse caso, tal valor deve ser truncado (arredondado para baixo). Assim, neste exemplo, a posição resultante é <tt>(x', y') = (14, 21)</tt>. </p>
+
+Observações:
+<ul>
+<li> Note que, em um cisalhamento, dois ou mais pontos da imagem original podem ser transferidos para o mesmo ponto da imagem final. Neste caso, é importante que a transferência seja calculada, a partir do ponto superior esquerdo da imagem (origem), linha a linha, de cima para baixo, e cada linha da esquerda para direita e, caso dois (ou mais) pontos sejam mapeados no mesmo ponto da imagem final, apenas o último ponto seja considerado (sobrepondo os valores previamente calculados para aquele ponto da imagem final). </li>
+<li>Por definição, se nenhum pixel da imagem inicial for mapeado para um pixel P qualquer da imagem final, então a cor de P deve ser definida como zero (preto). Além disso, se um pixel da imagem inicial for mapeado para um pixel que esteja fora das margens da imagem final (cujas dimensões são as mesmas da imagem inicial), tal mapeamento deve ser simplesmente desconsiderado. Por exemplo, um ponto de uma imagem 100 x 100 sendo transferido para a posição (120, 120) deve ser ignorado.. </li>
+</ul>
+        <i>Exemplo 4</i>: Cisalhamento
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> Imagem de entrada </em></b> </td>
+      <td> <b><em> Imagem de saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> P2<br>
+	   # 4 0.3 0.15<br>
+	   10 10 10<br>
+	   6 2 5 10 8 0 7 8 4 8<br>
+	   8 8 9 1 8 3 4 3 10 1<br>
+	   10 2 0 6 9 10 5 4 4 7<br>
+	   10 3 5 3 6 9 7 2 8 7<br>
+	   0 10 10 2 10 9 0 7 1 7<br>
+	   8 10 6 3 4 6 5 9 7 4<br>
+	   5 2 3 5 2 8 4 2 9 6<br>
+	   3 4 0 3 2 4 3 4 0 4<br>
+	   0 3 3 10 3 1 10 3 1 5<br>
+	   8 1 3 3 0 9 10 3 7 6<br>
+
+     </td>
+<td>P2<br>
+10 10 10<br>
+6 2 5 10 8 0 7 0 0 0<br>
+8 8 9 1 8 3 4 8 4 8<br>
+10 2 0 6 9 10 5 3 10 1<br>
+10 3 5 3 6 9 7 4 4 7<br>
+0 0 10 10 2 10 9 0 8 7<br>
+0 8 10 6 3 4 6 5 7 1<br>
+0 5 2 3 5 2 8 4 9 7<br>
+0 0 3 4 0 3 2 4 3 9<br>
+0 0 0 3 3 10 3 1 10 4<br>
+0 0 8 1 3 3 0 9 10 3<br>
+ </td>
+    </tr>
+  </tbody>
+</table>    
+    <br>
+    <br>
+    <i>Visualização</i>:
+<table border="1">
+      <tbody>
+        <tr>
+          <th>Entrada</th>
+          <th>Cisalhamento<br>(<tt>Px = 0.2 e Py = 0.0</tt>)</th>
+          <th>Cisalhamento<br>(<tt>Px = 0.0 e Py = 0.2</tt>)</th>
+          <th>Cisalhamento<br>(<tt>Px = 0.15 e Py = 0.15</tt>)</th>
+        </tr>
+        <tr>
+          <td> <img src="f3i.jpg" > </td>
+          <td> <img src="ci01.jpg"> </td>
+          <td> <img src="ci02.jpg"> </td>
+          <td> <img src="ci03.jpg"> </td>
+        </tr>
+      </tbody>
+    </table>
+<br>
+<br>
+<br>

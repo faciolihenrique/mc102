@@ -1,0 +1,230 @@
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laborat&oacute;rio 05b</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 05b - Killing the Messenger</h2>
+
+<b> <em> Prazo de entrega: </em> </b> 14/04/2014 às 13h59min59s <br>
+<b> <em> Peso: </em> </b> 4 <br> <br> <hr> <br>
+
+<p align="justify">
+A <i>Biologia Molecular</i> é a área de pesquisa que estuda a Biologia em nível molecular, com especial foco no estudo da estrutura e função do material genético e seus produtos de expressão, as proteínas. O DNA (ácido desoxirribonucleico) é um composto orgânico cujas moléculas contêm as instruções genéticas que coordenam o desenvolvimento e funcionamento dos seres vivos, e que serve para transmitir as características hereditárias de cada ser vivo. Sua estrutura foi descoberta conjuntamente pelo norte-americano James Watson e pelo britânico Francis Crick em 1953 e seu principal papel é armazenar as informações necessárias para a construção das proteínas e RNAs (ácidos ribonucleicos). Os segmentos de DNA que contêm a informação genética são denominados <i>genes</i>.</p>
+
+<p align="justify">
+<i>Ácidos nucleicos</i> são compostos químicos que possuem ácido fosfórico, açúcares e bases nitrogenadas: DNA e RNA são os dois tipos de ácidos nucleicos encontrados na natureza. A estrutura do DNA contém duas cadeias polinucleotídicas, em formato de hélices, que mantém-se unidas por pontes de hidrogênio estabelecidas entre pares de bases nitrogenadas específicos: adenina (A) com timina (T) e citosina (C) com guanina (G). Assim, as duas cadeias que constituem um segmento de DNA, são <i>complementares</i> entre si: onde em uma cadeia existir uma timina, na outra existirá uma adenina, e onde em uma existir uma guanina, na outra existirá uma citosina. Além disso, as duas sequências são <i>reversas</i> entre si: o sentido de leitura de uma das fitas do DNA é sempre inverso ao sentido de leitura da outra fita. Abaixo temos um exemplo de um trecho de DNA, onde a leitura da primeira fita é <tt>ACTAAGCTGAGGCATTGTCGATCGATCGACT</tt>, e a leitura da segunda fita é <tt>AGTCGATCGATCGACAATGCCTCAGCTTAGT</tt>:</p>
+<center>
+<tt>
+<table cellpadding='1' cellspacing='2' border='0'>
+  <tr align="center">
+    <td>A</td>
+    <td>C</td>
+    <td>T</td>
+    <td>A</td>
+    <td>A</td>
+    <td>G</td>
+    <td>C</td>
+    <td>T</td>
+    <td>G</td>
+    <td>A</td>
+    <td>G</td>
+    <td>G</td>
+    <td>C</td>
+    <td>A</td>
+    <td>T</td>
+    <td>T</td>
+    <td>G</td>
+    <td>T</td>
+    <td>C</td>
+    <td>G</td>
+    <td>A</td>
+    <td>T</td>
+    <td>C</td>
+    <td>G</td>
+    <td>A</td>
+    <td>T</td>
+    <td>C</td>
+    <td>G</td>
+    <td>A</td>
+    <td>C</td>
+    <td>T</td>
+  </tr>
+  <tr align="center">
+    <td>T</td>
+    <td>G</td>
+    <td>A</td>
+    <td>T</td>
+    <td>T</td>
+    <td>C</td>
+    <td>G</td>
+    <td>A</td>
+    <td>C</td>
+    <td>T</td>
+    <td>C</td>
+    <td>C</td>
+    <td>G</td>
+    <td>T</td>
+    <td>A</td>
+    <td>A</td>
+    <td>C</td>
+    <td>A</td>
+    <td>G</td>
+    <td>C</td>
+    <td>T</td>
+    <td>A</td>
+    <td>G</td>
+    <td>C</td>
+    <td>T</td>
+    <td>A</td>
+    <td>G</td>
+    <td>C</td>
+    <td>T</td>
+    <td>G</td>
+    <td>A</td>
+  </tr>
+</table>
+</tt>
+</center>
+<p align="justify">
+Já a estrutura do RNA é composta apenas de uma cadeia, e a base nitrogenada timina (T) é substituída pela base nitrogenada uracila (U). A figura abaixo exemplifica um trecho de uma estrutura de RNA à esquerda e um trecho de uma estrutura de DNA à direita.</p>
+
+<center><img src="RNADNA.jpg"></center>	<br>
+
+<p align="justify">
+A sequência de um gene do DNA define uma sequência de RNA mensageiro, o mRNA, em um processo chamado de transcrição. Posteriormente, a informação desse mRNA define uma ou mais sequências de proteínas, em um processo chamado de tradução. Esses processos fazem parte da expressão gênica: a informação codificada por um determinado gene é decodificada em uma proteína pelo ribossomo durante a tradução.</p>
+
+<p align="justify">
+<i>Engenharia genética</i> é o termo utilizado para o processo de manipulação dos genes em um organismo, geralmente fora do processo reprodutivo normal deste. Envolve com frequência o isolamento, a manipulação e a introdução do DNA num chamado corpo de prova, e tem como objetivo modificar ou introduzir novas características num organismo, com a produção de novas proteínas ou enzimas. </p>
+
+
+<p align="justify">
+O <i>gene knockout</i> (nocaute de genes) é uma técnica genética na qual um gene de um organismo é "nocauteado", ou seja, modificado de tal forma a anular a sua expressão. Esta técnica é utilizada para genes que foram sequenciados mas que possuem funções desconhecidas ou incompletas. Para isso, pesquisadores fazem o nocaute do gene desconhecido e realizam inferências na diferença entre o indivíduo com o gene nocauteado e um indivíduo normal. O nocaute é realizado através de uma combinação de técnicas, que começa num tubo de teste com um cromossomo artificial bacteriano e prossegue para cultura de células. Células-tronco embionárias são geneticamente transformadas e inseridas então em embriões. Animais resultantes desta técnica geralmente passam o gene nocauteado para as gerações futuras.</p>
+
+<p align="justify">
+Já o <i>gene silencing</i> (silenciamento de genes) é uma técnica que se refere a habilidade de uma célula evitar a expressão de um determinado gene. O silenciamento pode ocorrer durante a transcrição ou a tradução, e tem sido cada vez mais utilizado para terapias no combate de câncer e doenças infecciosas. Apesar de parecidos, o silenciamento e o nocaute de genes são diferentes: quando um gene é silenciado, sua expressão é reduzida, enquanto que quando um gene é nocauteado, ele é completamente removido do genoma do organismo e não mais se expressa.</p>
+
+<p align="justify">
+Métodos que utilizam silenciamento são considerados melhores que métodos que utilizam nocaute, uma vez que permitem pesquisadores estudar genes essenciais para a sobrevivência de organismos, e que por esta razão não podem ser nocauteados. Outro ponto positivo é que o nocaute exige a modificação do organismo previamente, ainda embrião, enquanto que o silenciamento pode ser realizado mesmo em organismos vivos. Além disso, o silenciamento fornece uma visão mais completa sobre o desenvolvimento de doenças, já que geralmente são associadas a genes que tiveram sua expressão reduzida.</p>
+
+<p align="justify">
+Um dos métodos de silenciamento utilizado em pesquisas é
+o <i>Antisense Oligonucleotide</i>. Neste método, um oligonucleotídeo
+(fragmento curto de ácido nucleico) complementar reverso a uma
+região de um mRNA casa-se com esta região quando inserido na célula
+alvo, causando o silenciamento do gene. O ribossomo não consegue
+traduzir o mRNA e assim deixa de produzir a proteína referente à
+informação contida nele. Ou seja, o oligonucleotídeo "matou" o (RNA)
+mensageiro responsável por transmitir aquela informação (gene).</p>
+
+<p align="justify">
+Abaixo temos um trecho de mRNA com 20 bases
+nitrogenadas <tt>(AACUCGUUCAGCGAGGCUAG)</tt> e um oligonucleotídeo com
+10 bases nitrogenadas <tt>(CCUCGCUGAA)</tt>, onde uma seta azul indica
+o sentido de leitura da sequência, e está posicionada no ponto mais
+próximo à primeira base nitrogenada daquela sequência (um
+oligonucleotídeo casa-se com um RNA inversamente ao sentido de leitura
+do mesmo). Note que neste exemplo o oligonucleotídeo casa-se com o
+trecho do mRNA a partir da posição 7 do trecho do mRNA: </p>
+
+<center>
+<table cellpadding='1' cellspacing='2' border='0'>
+
+  <tr align="center">
+    <th align="right">mRNA:</th>
+    <td> </td>
+    <td> </td>
+	<td><font color="blue">&#9658;</font></td>
+    <td>A</td>
+    <td>A</td>
+    <td>C</td>
+    <td>U</td>
+    <td>C</td>
+    <td>G</td>
+    <td><font color="red">U</font></td>
+    <td><font color="red">U</font></td>
+    <td><font color="red">C</font></td>
+    <td><font color="red">A</font></td>
+    <td><font color="red">G</font></td>
+    <td><font color="red">C</font></td>
+    <td><font color="red">G</font></td>
+    <td><font color="red">A</font></td>
+    <td><font color="red">G</font></td>
+    <td><font color="red">G</font></td>
+    <td>C</td>
+    <td>U</td>
+    <td>A</td>
+    <td>G</td>
+  </tr>
+  <tr align="center">
+    <th align="right">Oligonucleotídeo:</th>
+    <td></td>
+    <td></td>
+	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>A</td>
+    <td>A</td>
+    <td>G</td>
+    <td>U</td>
+    <td>C</td>
+    <td>G</td>
+    <td>C</td>
+    <td>U</td>
+    <td>C</td>
+    <td>C</td>
+    <td><font color="blue">&#9668;</font></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</center>
+
+<p align="justify">
+Escreva um programa que verifique, dado um mRNA e um oligonucleotídeo, se o gene correspondente foi silenciado ou não.</p>
+
+<h3> Entrada </h3>
+<ul>
+<li>O programa recebe primeiramente dois inteiros, <tt>R O</tt>,
+indicando respectivamente o número de bases nitrogenadas do trecho de
+mRNA e o número de bases nitrogenadas do oligonucleotídeo, com <tt> 25
+&le; R &le; 100</tt> e <tt>5 &le; O &le; 25</tt>.</li>
+
+<li>A segunda linha contém o trecho de mRNA, ou seja, uma sequência
+de <tt>R</tt> bases nitrogenadas representadas pelas
+letras <tt>A</tt>, <tt>U</tt>, <tt>C</tt> e <tt>G</tt>.</li>
+
+<li>A terceira linha contém o oligonucleotídeo, ou seja, uma sequência
+de <tt>O</tt> bases nitrogenadas representadas pelas
+letras <tt>A</tt>, <tt>U</tt>, <tt>C</tt> e <tt>G</tt>.</li>
+</ul>
+<h3>Saída</h3>
+<ul>
+<li>Se o gene foi silenciado, seu programa deve imprimir <tt>Silenciado em X</tt>, onde <tt>X</tt> é a posição, no trecho do mRNA, de início de casamento entre o oligonucleotídeio e o mRNA, com <tt>1 &le; X < R</tt>. Caso seja possível mais de um casamento no mesmo mRNA, apenas o casamento com a menor posição de início deve ser impressa. Se o gene não foi silenciado, seu programa deve imprimir <tt>Nao silenciado</tt>.</li>
+</ul>
+<h3>Exemplos</h3>
+<table cellpadding='2' cellspacing='0' border='1'>
+<tr align='center'><td width='15px'><b><tt>#</tt></b></td><td width='250px'><b><tt>Entrada</tt></b></td><td width='150px'><b><tt>Sa&iacute;da</tt></b></td></tr>
+<tr align='left' valign='top'><td>1</td><td><tt>20 10<br>AACUCGUUCAGCGAGGCUAG<br>CCUCGCUGAA</tt></td><td><tt>Silenciado em 7</tt></td></tr>
+<tr align='left' valign='top'><td>2</td><td><tt>30 5<br>GUGAAUGAUAGUGGUCUCGAUUAGCGGAAG<br>UCCCC</tt></td><td><tt>Nao silenciado</tt></td></tr>
+<tr align='left' valign='top'><td>3</td><td><tt>25 15<br>UGUGUAUGUGUGAGUAUACUAUUAC<br>AAUAGUAUACUCACA</tt></td><td><tt>Silenciado em 9</tt></td></tr>
+</table><br>
+
+</body></html>

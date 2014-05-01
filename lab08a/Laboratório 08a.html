@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laboratório 08a</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 08a - Amigos dos amigos </h2>
+
+<b> <em> Prazo de entrega: </em> </b> 28/04/2014 às 23h59min59s <br>
+<b> <em> Peso: </em> </b> 5 <br> <br> <hr> <br>
+
+<p> Atualmente, o Facebook é a rede social mais popular do mundo. Em outubro de 2012, o Facebook atingiu a marca de 1 bilhão de usuários ativos. Desde sua criação em fevereiro de 2004, em média, 316 mil pessoas se cadastram no site por dia. Os usuários podem criar um perfil pessoal, adicionar outros usuários como amigos e trocar mensagens, incluindo notificações automáticas quando atualizarem o seu perfil. Além disso, os usuários podem participar de grupos de interesse comum e categorizar seus contatos em listas como "colegas de trabalho" ou "amigos íntimos". </p>
+
+<div align="center"><img src="curti.jpg" width = 400></div>
+<div align="center"><i>Curti!</i></div> 
+
+<br>
+<p>A rede de amizades do Facebook pode ser modelada como uma matriz <tt>M</tt> de dimensão <tt>N x N</tt>, onde <tt>N</tt> é o número de pessoas cadastradas. Cada posição <tt>M<sub>i,j</sub></tt> da matriz representa o relacionamento entre um usuário <tt>i</tt> e um usuário <tt>j</tt>. Se os usuários <tt>i</tt> e <tt>j</tt> são amigos, então <tt>M<sub>i,j</sub> = M<sub>j,i</sub> = 1</tt>. Caso contrário, <tt>M<sub>i,j</sub> = M<sub>j,i</sub> = 0</tt>. Essa matriz é simétrica, uma vez que, se o usuário <tt>i</tt> é amigo do usuário <tt>j</tt>, então o usuário <tt>j</tt> também é amigo do usuário <tt>i</tt>. Por definição, todo usuário é amigo de si mesmo, logo <tt>M<sub>i,i</sub> = 1</tt> para todo <tt>0 &le; i &lt; N</tt>.</p>
+
+<div align="center"><img src="mat.png" ></div><br>
+<div align="center"><i>Exemplo da matriz de relacionamentos do Facebook.</i></div> 
+<br>
+
+<p>Uma ferramenta interessante existente no Facebook é a sugestão de amigos. Essa ferramenta utiliza informações sobre outros usuários da rede para indicar pessoas que ele provavelmente conheça. Entre outras coisas, esta ferramenta sugere que um usuário adicione aos seus contatos usuários que são amigos de seus amigos. No exemplo anterior, a ferramenta irá sugerir ao usuário <tt>1</tt> que ele adicione como amigos os usuários <tt>5</tt> e <tt>7</tt>, uma vez que eles não são amigos do usuário 1 mas são amigos de um amigo dele (no caso, o usuário <tt>2</tt>). Note que, os amigos dos amigos do usuário <tt>0</tt> (<tt>3</tt> e <tt>4</tt>) também são amigos de <tt>0</tt>. Da mesma forma, o usuário <tt>6</tt> não possui amigos. Logo, nenhuma sugestão de amizade será feita nesses dois casos.</p>
+
+<p>Neste laboratório, o seu objetivo é, dados uma matriz de relacionamentos e um número que representa um usuário <tt>U</tt> qualquer, escrever um programa que imprima a lista de todos os amigos dos amigos de <tt>U</tt> que ainda não são amigos de <tt>U</tt>. A lista de amigos dos amigos deve ser impressa em ordem crescente.</p>
+
+<h3> Entrada </h3>
+
+<ul>
+  <li> Dois inteiros <tt>N</tt> e <tt>U</tt>, representando o número de usuários do Facebook e o Usuário <tt>U</tt>, respectivamente, onde <tt>1 &le; N &le; 100</tt> e <tt>0 &le; U &lt; N</tt>;</li>
+  <li> Uma matriz de dimensão <tt>N x N</tt> que representa a matriz de relacionamentos conforme apresentada na figura e nos exemplos abaixo.</li>
+  
+</ul>
+<h3> Saída </h3>
+Seu programa deve imprimir:
+<ul>
+  <li>A mensagem "<tt>Sugestao de amigos: X Y ... Z</tt>", caso existam amigos de amigos
+  de <tt>U</tt> ainda não cadastrados como amigos de <tt>U</tt>;</li>
+  <li>Ou a mensagem "<tt>Sem sugestao de novos amigos</tt>", caso contrário.</li>
+</ul>
+
+<h3> Exemplos </h3>
+
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> # </em></b> </td>
+      <td> <b><em> Entrada </em></b> </td>
+      <td> <b><em> Saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> 1 </td>
+      <td> 8 1<br>
+1 0 0 1 1 0 0 0<br>
+0 1 1 0 0 0 0 0<br>
+0 1 1 0 0 1 0 1<br>
+1 0 0 1 1 0 0 0<br>
+1 0 0 1 1 0 0 0<br>
+0 0 1 0 0 1 0 0<br>
+0 0 0 0 0 0 1 0<br>
+0 0 1 0 0 0 0 1<br> </td>
+      <td>Sugestao de amigos: 5 7<br></td>
+    </tr>
+    <tr valign="top">
+      <td> 2 </td>
+      <td> 8 0<br>
+1 0 0 1 1 0 0 0<br>
+0 1 1 0 0 0 0 0<br>
+0 1 1 0 0 1 0 1<br>
+1 0 0 1 1 0 0 0<br>
+1 0 0 1 1 0 0 0<br>
+0 0 1 0 0 1 0 0<br>
+0 0 0 0 0 0 1 0<br>
+0 0 1 0 0 0 0 1<br> </td></td>
+      <td>Sem sugestao de novos amigos</td>
+    </tr>
+    <tr valign="top">
+      <td> 3 </td>
+      <td> 5 3<br>
+1 1 1 1 1<br>
+1 1 0 0 0<br>
+1 0 1 0 0<br>
+1 0 0 1 0<br>
+1 0 0 0 1<br> </td>
+      <td>Sugestao de amigos: 1 2 4<br></td>
+    </tr>
+  </tbody>
+</table>
+
+<br> <br>
+
+</body>
+
+</html>
+

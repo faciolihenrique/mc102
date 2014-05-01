@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laborat&oacute;rio 04a</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programa&ccedil;&atilde;o de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computa&ccedil;&atilde;o - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e Jos&eacute; Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 04a - Deep Web </h2>
+
+<b> <em> Prazo de entrega: </em> </b> 31/03/2014 &agrave;s 23h59min59s <br>
+<b> <em> Peso: </em> </b> 3 <br> <br> <hr> <br>
+
+<p align="justify"> Quando queremos buscar informações na Internet,
+costumamos recorrer a buscadores como o Google. No entanto, os dados
+que percorrem a rede mundial de computadores v&atilde;o al&eacute;m do
+que &eacute; mostrado nessas ferramentas de busca. Muito do que
+n&atilde;o aparece nos resultados de busca, como arquivos
+cient&iacute;ficos, livros raros ou at&eacute; mesmo novos
+v&iacute;rus est&atilde;o presente na “<em>Deep Web</em>” (Web
+Profunda).</p>
+
+<p align="justify"> Estima-se que 97% dos sites existentes na Internet est&atilde;o "perdidos" nessa regi&atilde;o. Muitos desses sites s&atilde;o acessados somente por vias n&atilde;o convencionais, como a utiliza&ccedil;&atilde;o de servidores proxi, diretamente pelo endere&ccedil;o IP do site, etc. Por isso, esses portais s&atilde;o utilizados para tr&aacute;fico de drogas, tr&aacute;fico de pessoas, pornografia infantil, comunica&ccedil;&atilde;o de grupos extremistas, entre outros. </p>
+
+<div align="center"><img src="deep.jpg"></div>
+
+<br>
+<br>
+
+<p align="justify"> A Ag&ecirc;ncia Nacional de Seguran&ccedil;a (NSA) dos EUA est&aacute; envolvida em uma mega opera&ccedil;&atilde;o para rastrear os acessos de um famoso site da Deep Web chamado "El Terror". A suspeita &eacute; que membros de um grupo extremista est&atilde;o utilizando este site para planejar um novo ataque terrorista aos Estados Unidos.</p>
+
+<p align="justify"> Ap&oacute;s v&aacute;rios dias de investiga&ccedil;&atilde;o, os oficiais da NSA descobriram que, al&eacute;m de outras medidas, era necess&aacute;ria uma senha num&eacute;rica de 15 d&iacute;gitos para poder acessar o site. </p>
+
+<p align="justify"> Quando algum oficial tentava acessar o site, aparecia na tela um campo com 15 posi&ccedil;&otilde;es para que a senha fosse preenchida. Entretanto, os primeiros d&iacute;gitos da senha j&aacute; estavam disponiveis. Para cada acesso, o n&uacute;mero de d&iacute;gitos apresentados era diferente, bem como os d&iacute;gitos em si e, obviamente, nunca era fornecida a senha completa. </p>
+
+<p align="justify"> Um investigador da NSA suspeitou que o restante da senha poderia ser gerado por meio de opera&ccedil;&otilde;es utilizando os primeiros d&iacute;gitos da senha j&aacute; fornecidos. Ele conhecia um antigo sistema matem&aacute;tico para gera&ccedil;&atilde;o de senha e, ap&oacute;s muita investiga&ccedil;&atilde;o, descobriram que o site "El Terror" utilizava esse sistema para gera&ccedil;&atilde;o das senhas.</p>
+
+<p align="justify"> As senhas são geradas como explicado a seguir. Suponha que os primeiros d&iacute;gitos disponiveis da senha são: </tt>9 9 0 7 2 4</tt>.</p> 
+
+<br><div align="center"><table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td><b> Posi&ccedil;&atilde;o</b> </td>
+      <td>  1  </td>
+      <td>  2  </td>
+      <td>  3  </td>
+      <td>  4  </td>
+      <td>  5  </td>
+      <td>  6  </td>
+      <td>  7  </td>
+      <td>  8  </td>
+      <td>  9  </td>
+      <td>  10  </td>
+      <td>  11  </td>
+      <td>  12  </td>
+      <td>  13  </td>
+      <td>  14  </td>
+      <td>  15  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  D&iacute;gito </b></td>
+      <td>  9  </td>
+      <td>  9  </td>
+      <td>  0  </td>
+      <td>  7  </td>
+      <td>  2  </td>
+      <td>  4  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+  </tbody>
+</table></div><br>
+
+<p align="justify">Primeiramente calcula-se, para cada d&iacute;gito, a multiplica&ccedil;&atilde;o entre o n&uacute;mero de d&iacute;gitos conhecidos, a posi&ccedil;&atilde;o do d&iacute;gito e seu valor. Neste exemplo, para o qual 6 d&iacute;gitos s&atilde;o conhecidos, o valor de tal multiplica&ccedil;&atilde;o para o primeido d&iacute;gito &eacute; <tt>54</tt>, pois <tt>6 x 1 x 9 = 54</tt>. Para o segundo dígito, o valor é <tt>108</tt>, pois <tt>6 x 2 x 9 = 108</tt>. A seguir está o c&aacute;lculo para todos os d&iacute;gitos conhecidos. </p>
+
+<br><div align="center"><table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td><b> Posi&ccedil;&atilde;o</b> </td>
+      <td>  1  </td>
+      <td>  2  </td>
+      <td>  3  </td>
+      <td>  4  </td>
+      <td>  5  </td>
+      <td>  6  </td>
+      <td>  7  </td>
+      <td>  8  </td>
+      <td>  9  </td>
+      <td>  10  </td>
+      <td>  11  </td>
+      <td>  12  </td>
+      <td>  13  </td>
+      <td>  14  </td>
+      <td>  15  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  D&iacute;gito </b></td>
+      <td>  9  </td>
+      <td>  9  </td>
+      <td>  0  </td>
+      <td>  7  </td>
+      <td>  2  </td>
+      <td>  4  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  Multiplica&ccedil;&atilde;o </b></td>
+      <td>  54  </td>
+      <td>  108  </td>
+      <td>  0 </td>
+      <td>  168  </td>
+      <td>  60  </td>
+      <td>  144  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+  </tbody>
+</table></div><br>
+
+<p align="justify">Os valores encontrados s&atilde;o somados: <tt>54 + 108 + 0 + 168 + 60 + 144 = 534</tt> </p>
+
+<p align="justify"> O pr&oacute;ximo d&iacute;gito da senha (o d&iacute;gito da posi&ccedil;&atilde;o <tt>7</tt> neste exemplo) &eacute; o resto da divis&atilde;o desta soma por 11. Se o resultado for igual a 10, o dígito recebe o valor 0. Logo, o pr&oacute;ximo d&iacute;gito da senha &eacute; <tt>6</tt>, j&aacute; que o resto da divis&atilde;o <tt>534/11</tt> &eacute; igual a <tt>6</tt>.</p>
+
+<br><div align="center"><table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td><b> Posi&ccedil;&atilde;o</b> </td>
+      <td>  1  </td>
+      <td>  2  </td>
+      <td>  3  </td>
+      <td>  4  </td>
+      <td>  5  </td>
+      <td>  6  </td>
+      <td>  7  </td>
+      <td>  8  </td>
+      <td>  9  </td>
+      <td>  10  </td>
+      <td>  11  </td>
+      <td>  12  </td>
+      <td>  13  </td>
+      <td>  14  </td>
+      <td>  15  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  D&iacute;gito </b></td>
+      <td>  9  </td>
+      <td>  9  </td>
+      <td>  0  </td>
+      <td>  7  </td>
+      <td>  2  </td>
+      <td>  4  </td>
+      <td><b>6</b></td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+  </tbody>
+</table></div><br>
+
+<p align="justify"> Para calcular o d&iacute;gito da posi&ccedil;&atilde;o 8, o processo &eacute; repetido considerando agora que conhecemos 7 d&iacute;gitos.</p>
+
+<br><div align="center"><table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td><b> Posi&ccedil;&atilde;o</b> </td>
+      <td>  1  </td>
+      <td>  2  </td>
+      <td>  3  </td>
+      <td>  4  </td>
+      <td>  5  </td>
+      <td>  6  </td>
+      <td>  7  </td>
+      <td>  8  </td>
+      <td>  9  </td>
+      <td>  10  </td>
+      <td>  11  </td>
+      <td>  12  </td>
+      <td>  13  </td>
+      <td>  14  </td>
+      <td>  15  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  D&iacute;gito </b></td>
+      <td>  9  </td>
+      <td>  9  </td>
+      <td>  0  </td>
+      <td>  7  </td>
+      <td>  2  </td>
+      <td>  4  </td>
+      <td>  6  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  Multiplica&ccedil;&atilde;o </b></td>
+      <td>  63  </td>
+      <td>  126  </td>
+      <td>  0  </td>
+      <td>  196  </td>
+      <td>  70  </td>
+      <td>  168 </td>
+      <td>  294 </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+  </tbody>
+</table></div><br>
+  
+<p align ="justify"> Novamente, ap&oacute;s as multiplica&ccedil;&otilde;es calculamos a soma, que &eacute; <tt>63 + 126 + 0 + 196 + 70 + 168 + 294 = 917</tt>. Assim, o próximo dígito é <tt>4</tt>, já que o resto da divisão <tt>917/11</tt> é igual a <tt>4</tt>.</p>
+
+<br><div align="center"><table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td><b> Posi&ccedil;&atilde;o</b> </td>
+      <td>  1  </td>
+      <td>  2  </td>
+      <td>  3  </td>
+      <td>  4  </td>
+      <td>  5  </td>
+      <td>  6  </td>
+      <td>  7  </td>
+      <td>  8  </td>
+      <td>  9  </td>
+      <td>  10  </td>
+      <td>  11  </td>
+      <td>  12  </td>
+      <td>  13  </td>
+      <td>  14  </td>
+      <td>  15  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  D&iacute;gito </b></td>
+      <td>  9  </td>
+      <td>  9  </td>
+      <td>  0  </td>
+      <td>  7  </td>
+      <td>  2  </td>
+      <td>  4  </td>
+      <td><b>6</b></td>
+      <td><b>4</b></td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+      <td>  -  </td>
+    </tr>
+  </tbody>
+</table></div><br>
+
+<p align="justify"> O processo se repete at&eacute; que todos os 15 d&iacute;gitos da senha sejam encontrados.</p>
+
+<br><div align="center"><table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td><b> Posi&ccedil;&atilde;o</b> </td>
+      <td>  1  </td>
+      <td>  2  </td>
+      <td>  3  </td>
+      <td>  4  </td>
+      <td>  5  </td>
+      <td>  6  </td>
+      <td>  7  </td>
+      <td>  8  </td>
+      <td>  9  </td>
+      <td>  10  </td>
+      <td>  11  </td>
+      <td>  12  </td>
+      <td>  13  </td>
+      <td>  14  </td>
+      <td>  15  </td>
+    </tr>
+    <tr align="center">
+      <td><b>  D&iacute;gito </b></td>
+      <td>  9  </td>
+      <td>  9  </td>
+      <td>  0  </td>
+      <td>  7  </td>
+      <td>  2  </td>
+      <td>  4  </td>
+      <td><b>6</b></td>
+      <td><b>4</b></td>
+      <td><b>6</b></td>
+      <td><b>6</b></td>
+      <td><b>9</b></td>
+      <td><b>0</b></td>
+      <td><b>2</b></td>
+      <td><b>1</b></td>
+      <td><b>5</b></td>
+    </tr>
+  </tbody>
+</table></div><br>
+
+<p align="justify">O site possui um sistema de seguran&ccedil;a que muda a sequ&ecirc;ncia de d&iacute;gitos a cada 15 segundos. Logo, fica invi&aacute;vel realizar todos estes c&aacute;lculos &agrave; m&atilde;o. Sabendo disso, a NSA est&aacute; precisando de sua ajuda para implementar o sistema de gerador de senhas que, dados os <tt>n</tt> primeiros d&iacute;gitos de uma senha (<tt>1 ≤ n ≤ 12</tt>), descubra qual &eacute; a senha completa.</p>
+
+<h3> Entrada </h3>
+
+<ul>
+  <li> A entrada consiste inicialmente em um valor inteiro n que representa o n&uacute;mero de d&iacute;gitos da parte conhecida da senha, com <tt>1 &le; n &le; 12</tt>;</li>
+  <li> A seguir s&atilde;o dados <tt>n</tt> d&iacute;gitos <tt>D1 D2 ... Dn</tt>, onde <tt>Di</tt> &eacute; o i-&eacute;simo d&iacute;gito conhecido da senha, com <tt>0 &le; Di &le; 9</tt> e <tt>1 &le; i &le; n</tt>. </li>
+</ul>
+
+<h3> Sa&iacute;da </h3>
+
+<ul>
+  <li> O programa deve imprimir a senha completa, conforme o exemplo abaixo. </li>
+</ul>
+
+<h3> Exemplos </h3>
+
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td>  #  </td>
+      <td>  Entrada  </td>
+      <td>  Sa&iacute;da  </td>
+    </tr>
+    <tr valign="top">
+      <td> 1 </td>
+      <td> 6<br> 9 9 0 7 2 4</td>
+      <td> 990724646690215 </td>
+    </tr>
+    <tr valign="top">
+      <td> 2 </td>
+      <td> 2<br> 9 9 </td>
+      <td> 990475081170420 </td>
+    </tr>
+    <tr valign="top">
+      <td> 3 </td>
+      <td> 12<br> 9 3 8 7 4 7 7 2 1 0 0 9 </td>
+      <td> 938747721009372 </td>
+    </tr>
+  </tbody>
+</table>
+
+<br><br>
+</body>
+
+</html>

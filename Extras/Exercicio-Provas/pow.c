@@ -1,0 +1,1 @@
+#include <stdio.h>int main(){    double pow, x, y, i;    scanf("%lf %lf", &x, &y);    for(i = 1, pow = 1; i <= y; i++){        pow = pow * x;    }    printf("%f\n",pow);        return 0;}        

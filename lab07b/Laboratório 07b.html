@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laboratório 07b</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 07b - Modern Word Search </h2>
+
+<b> <em> Prazo de entrega: </em> </b> 28/04/2014 às 13h59min59s <br>
+<b> <em> Peso: </em> </b> 5 <br> <br> <hr> <br>
+
+<p> Philip Dunphy (Phil) e Claire Dunphy são um casal não muito fora do
+comum. Phil gosta de ser o pai legal, amigo dos filhos, enquanto sobra para
+Claire o papel de mãe responsável. </p>
+
+<p> Apesar disso, ambos são incrivelmente parecidos quando se trata de
+competição. Na discussão mais recente deles, Phil desafiou Claire com um jogo de
+caça-palavras. Ele disse que ela não vai ser capaz de resolver todos os que ele
+vai criar, pois eles são muito difíceis e bem diferentes. E assim, com uma
+simples troca de palavras, um desafio foi criado. </p>
+
+<p> Normalmente, Claire usaria todo seu tempo (que ela divide em cuidar da casa,
+dos filhos e trabalhar fora) para resolver qualquer desafio que seu marido lhe
+fizesse. Porém, depois que ela viu o primeiro jogo que ele criou, ela percebeu
+que não vai ser tão fácil: </p>
+
+<center> <table> <tbody><!--{{{-->
+<tr> <td> <tt>
+t h e t r t h e e h e e t e r t h e r e <br>
+h t e h e t e r e t h e % r e e r h h e <br>
+e r h % e e r e t t r h h t h r e t h h <br>
+t t e e h t h e r e e t e e h e r t e r <br>
+h r r e r h e e e t h r r e h e e e t t <br>
+e r e t e e e e e _ h t h h t e r r t e <br>
+h e e h h t e e e h e r h t h r e e e r <br>
+t h _ r r e r t t e h r r t e h h t r r <br>
+e r h r r t e r e e e h r h r t e _ e h <br>
+e r t h e h r t e _ t r r r e h r e h e <br>
+t r r r r t e r r r e e e t e r t r t e <br>
+e t e t t e e h t e e t e e t e r h e r <br>
+e r h r t e h % t h # % e t t h e h r t <br>
+r h e r e r e e t h e e e t r h # h e t <br>
+r e t r e # e h e r r r t t h h % r t e <br>
+h e h e t h e _ r e e e e t e e # h t t <br>
+h t e e h h e h t e t r e t e r % e h h <br>
+r e e e e t e t e e t e # t r t # t h e <br>
+t h e % e # e r r h t t t h e e % t r r <br>
+e r h e h e e e _ h e h e e r e e r e r <br>
+</tt> </td>
+<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+<td> Encontrar todas <br> as ocorrências de: <br> <br>
+        <i>there</i> <br>
+</tbody> </table> </center> <br><!--}}}-->
+
+<p> Além da dificuldade devida à escolha das palavras e das letras usadas, os
+caça-palavras de Phil contêm ainda caracteres "especiais":
+<ul>
+  <li> um '<tt>_</tt>' representa um caractere qualquer, </li>
+  <li> um '<tt>#</tt>' representa uma vogal qualquer, e </li>
+  <li> um '<tt>%</tt>' representa uma consoante qualquer. </li>
+</ul>
+</p>
+
+<p> A notícia boa é que Phil resolveu "facilitar" um pouco e contou que só
+deve-se contar as ocorrências na vertical se a palavra estiver escrita de cima
+para baixo e só devem-se contar as ocorrências na horizontal e na diagonal se a
+palavra estiver escrita da esquerda para a direita. Mesmo assim, podem existir
+várias ocorrências de uma palavra. </p>
+
+<p> Abaixo são exibidas em destaque todas as ocorrências da palavra
+<tt>there</tt>, considerando ocorrências na horizontal, vertical e diagonal,
+respectivamente. </p>
+
+<center> <table style="font-family: monospace; text-align: center;"> <tbody><!--{{{-->
+<tr> <td>
+Horizontal (4 ocorrências) <br><br>
+...............there<br>
+....................<br>
+....................<br>
+.....there..........<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+........th#%e.......<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+the%e...............<br>
+....................<br>
+</td>
+<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+<td>
+Vertical (2 ocorrências) <br><br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+..............t.....<br>
+..............h.....<br>
+..............e.....<br>
+..............r.....<br>
+..............e.....<br>
+....................<br>
+...........t........<br>
+...........%........<br>
+...........e........<br>
+...........r........<br>
+...........e........<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+</td>
+<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+<td>
+Diagonal (4 ocorrências) <br><br>
+....................<br>
+.t..................<br>
+..h..........t......<br>
+...e..........h.....<br>
+....r..........e....<br>
+.....e..........r...<br>
+.................e..<br>
+....................<br>
+....................<br>
+....................<br>
+....................<br>
+........t...........<br>
+.........h..........<br>
+..........e.........<br>
+...........r........<br>
+....t.......e.......<br>
+.....h..............<br>
+......e.............<br>
+.......r............<br>
+........_...........<br>
+</td> </tr>
+</tbody> </table> </center> <br><!--}}}-->
+
+<p> Claire realmente não gosta de perder para o marido, mas ao mesmo tampo ela
+não gosta de perder tempo! Ela pediu para sua filha mais inteligente, Alex,
+ajudá-la com isso. É claro que com os SATs, Alex não vai gastar seu tempo (que
+ela considera mais precioso ainda do que o de sua mãe) com isso. Ela então pediu
+ajuda nessa tarefa a um amigo que sabe programar: o professor Zanoni. É claro
+que, apesar da amizade, ele não vai gastar o tempo dele com isso e acabou
+delegando a tarefa aos seus PEDs. Os PEDs, por sua vez, estão muito ocupados
+elaborando laboratórios extremamente difíceis para as próximas semanas e
+preferem deixar que você resolva isso. Além de mostrar quantas ocorrências de
+cada palavra existem, você precisa destacá-las na matriz do caça-palavras, senão
+Phil nunca vai acreditar que a Claire de fato encontrou as palavras. </p>
+
+<h3> Entrada </h3>
+
+<ul>
+  <li> A primeira linha da entrada contém dois inteiros <tt>N</tt> e <tt>M</tt>
+  e uma palavra <tt>&lambda;</tt>, separados por espaço, onde:
+  <ul>
+    <li> <tt>N</tt> indica o número de linhas da matriz do caça-palavras (<tt>2
+            &le; N &le; 50</tt>); </li>
+    <li> <tt>M</tt> indica a quantidade de caracteres por linha da matriz (<tt>2
+            &le; M &le; 50</tt>); e </li>
+    <li> a palavra <tt>&lambda;</tt> possui <tt>P</tt> caracteres <tt>c</tt>,
+    com <tt>2 &le; P &le; 25</tt> e <tt>c &isin; {a,b,c,...,z}</tt>, e indica
+    qual é a palavra a ser procurada. </tt> </li>
+  <li> As próximas <tt>N</tt> linhas possuem <tt>M</tt> caracteres <tt>c</tt>
+  cada uma, com <tt>c &isin; {a,b,c,...,z,_,#,%}</tt>, que representam uma linha
+  da matriz do caça-palavras. </li>
+</ul>
+
+<h3> Saída </h3>
+
+<ul>
+  <li> Você deve imprimir uma linha no formato "<tt>&lambda; x</tt>", onde
+  <tt>&lambda;</tt> é a palavra que foi procurada e <tt>x</tt> deve indicar a
+  quantidade de ocorrências de tal palavra na matriz do caça-palavras. </li>
+  <li> Você também deve imprimir <tt>N</tt> linhas com <tt>M</tt> caracteres
+  cada uma, destacando as ocorrências da palavra procurada, conforme mostrado
+  nos exemplos (coloque um caractere <tt>.</tt> nas letras que não fazem parte
+  das ocorrências). </li>
+</ul>
+
+<h3> Exemplos </h3>
+
+<table style="font-family: monospace; text-align: left; font-size: 14px" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> # </em></b> </td>
+      <td> <b><em> Entrada </em></b> </td>
+      <td> <b><em> Saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> 1 </td><!--{{{-->
+      <td> 
+        20 20 there<br>
+        thetrtheeheeterthere<br>
+        hteheterethe%reerhhe<br>
+        erh%eerettrhhthrethh<br>
+        tteehthereeteeherter<br>
+        hrrerheeethrreheeett<br>
+        ereteeeee_hthhterrte<br>
+        heehhteeeherhthreeer<br>
+        th_rrerttehrrtehhtrr<br>
+        erhrrtereeehrhrte_eh<br>
+        erthehrte_trrrehrehe<br>
+        trrrrterrreeetertrte<br>
+        etetteehteeteeterher<br>
+        erhrteh%th#%etthehrt<br>
+        rherereetheeetrh#het<br>
+        retre#eherrrtthh%rte<br>
+        hehethe_reeeetee#htt<br>
+        hteehhehtetreter%ehh<br>
+        reeeeteteete#trt#the<br>
+        the%e#errhttthee%trr<br>
+        erheheee_heheereerer<br>
+      </td>
+      <td> 
+        there 10<br>
+        ...............there<br>
+        .t..................<br>
+        ..h..........t......<br>
+        ...e.there....h.....<br>
+        ....r..........e....<br>
+        .....e........t.r...<br>
+        ..............h..e..<br>
+        ..............e.....<br>
+        ..............r.....<br>
+        ..............e.....<br>
+        ....................<br>
+        ........t..t........<br>
+        ........th#%e.......<br>
+        ..........ee........<br>
+        ...........r........<br>
+        ....t......ee.......<br>
+        .....h..............<br>
+        ......e.............<br>
+        the%e..r............<br>
+        ........_...........<br>
+      </td><!--}}}-->
+    </tr>
+    <tr valign="top">
+      <td> 2 </td>
+      <td><!--{{{-->
+        2 2 oi <br>
+        i% <br>
+        #i <br>
+      </td>
+      <td> 
+        oi 1 <br>
+        .. <br>
+        #i <br>
+      </td><!--}}}-->
+    </tr>
+    <tr valign="top">
+      <td> 3 </td>
+      <td> <!--{{{-->
+        38 25 philandclaireforever<br>
+        rpdidpohrhvedvavrileerilh<br>
+        ecaea#_n#vn#apiav%inh#%nc<br>
+        a_fdphilandcl#ireforeve%i<br>
+        ncerf%vripcevif%ehehehfvv<br>
+        elaeadvveccaiefr%lccr#rvr<br>
+        _pinr#voidhipe_irhairp#pl<br>
+        hehoaid__ri%pe#drrcivlrec<br>
+        eah#nleraafrirfe_aer%#cep<br>
+        iali%ao_dl%lrdlfrvelhrpn_<br>
+        rrofcavnefernrrldovfellil<br>
+        rrldidnh%hldecflhhlidie%a<br>
+        podaeaadrrrvieanoah##avvd<br>
+        ape%rorp_rehnrc_leioacpli<br>
+        ehpirdofel#i%#vieeelrliri<br>
+        ifri_lepl#aaf%re%_ifroi#c<br>
+        rea_ifvhifeiiiehp_lre_eii<br>
+        r%e#reaoarreropoahececiep<br>
+        aeaiencf_pliaehrplaleecvf<br>
+        doifo_rlh#%dpa_#vla_%er##<br>
+        rrilhiie%vhfnnlo_rr_plrir<br>
+        #cprpece%rccrpa_riroh%f%d<br>
+        oorvieililanai_rae%eefalh<br>
+        lr%v_rldnrl#hddaaavio#dl%<br>
+        aidvnf%_iofpeocdfvnevle#v<br>
+        cvoalefeehvdralipvavrihra<br>
+        ferddpovrerillae_%eod#ovl<br>
+        ill_rddp_eheleiiiaafrenln<br>
+        a_rlecplrrrr_aririllp#eal<br>
+        %flpe_aildnrdl###eio_orar<br>
+        aivecol%elaodrfefidfn#dvl<br>
+        aevepe_rnaerlioenrldirfd_<br>
+        r%i#eilff_ccrerehiileliir<br>
+        da_errprdedlife_p%#finleh<br>
+        ealo_i_rlir#n%v#_lhveeroi<br>
+        ericver%eie#lleireehrvere<br>
+        dd#%ehridefeerrnppailc__r<br>
+        cli%%ra%ohcirii_vlr#lnpec<br>
+        %fpeiireovad_creoi_ee%cai<br>
+      </td>
+      <td>
+        philandclaireforever 3<br>
+        .........................<br>
+        .........................<br>
+        ....philandcl#ireforeve%.<br>
+        .........................<br>
+        .........................<br>
+        .p.......................<br>
+        ..h......................<br>
+        ...#.....................<br>
+        ....%....................<br>
+        .....a...................<br>
+        ......n..................<br>
+        .......d.................<br>
+        ........_................<br>
+        .........l...............<br>
+        ..........a..............<br>
+        ...........i.............<br>
+        ............r.p..........<br>
+        .............eh..........<br>
+        .............._..........<br>
+        ..............lo.........<br>
+        ..............a.r........<br>
+        .............._..e.......<br>
+        ..............d...v......<br>
+        ..............c....e.....<br>
+        ..............l.....r....<br>
+        ..............a..........<br>
+        ..............i..........<br>
+        ..............r..........<br>
+        ..............#..........<br>
+        ..............f..........<br>
+        ..............o..........<br>
+        ..............r..........<br>
+        ..............e..........<br>
+        ..............v..........<br>
+        ..............e..........<br>
+        ..............r..........<br>
+        .........................<br>
+        .........................<br>
+      </td><!--}}}-->
+    </tr>
+  </tbody>
+</table>
+
+<br> <br>
+
+</body>
+
+</html>
+

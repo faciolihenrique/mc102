@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+        
+<head>
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>Laboratório 03a</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<style type="text/css">
+sub, sup {
+        font-size: 0.8em;
+}
+</style>
+
+<em> <b> MC102: Algoritmos e Programação de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computação - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e José Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 03a - Composição de senha </h2>
+
+<b> <em> Prazo de entrega: </em> </b> 24/03/2014 às 23h59min59s <br>
+<b> <em> Peso: </em> </b> 2 <br> <br> <hr> <br>
+
+<p> <a href="http://goo.gl/Jtakhq" target="_blank">Richard Paul Astley</a> é um
+cantor, compositor e músico. Mas isso, é claro, todos sabem. O que ninguém sabe
+é que Richard também é muito desconfiado. Seu banco só permite que números sejam
+utilizados para formar a senha. Em contrapartida, ele não limita a quantidade de
+números que o cliente precisa utilizar. Por isso, toda semana Richard troca sua
+senha de banco por uma outra gerada aleatoriamente. </p>
+
+<p> É claro que Richard não consegue decorar suas senhas e por isso precisa
+escrevê-las em um papel que ele carrega sempre consigo. Obviamente, Richard não
+as escreve simplesmente de uma forma que qualquer um possa entender. Ele
+inventou seu próprio código de escrita. </p>
+
+<p> Um código em notação musical. </p>
+
+<p> Em música, a <i>duração</i> é o tempo em que uma nota é tocada ou o tempo
+entre duas notas. Acontece que a noção de duração é relativa. Em uma estrutura
+rítmica, é mais importante a relação entre as durações das notas do que sua
+duração absoluta. As durações são representadas pelos símbolos utilizados na
+partitura, também chamados de figuras. Hoje em dia a maior figura é a semibreve.
+A tabela abaixo mostra a duração como fração da semibreve. </p>
+
+<center><!--{{{-->
+<table style="text-align: center" border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr> 
+      <td><img src="1semibreve.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="2minima.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="3seminima.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="4colcheia.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="5semicolcheia.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="6fusa.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="7semifusa.png" alt="" style="width:70px; height: 70px"></img></td>
+      <td><img src="8quartifusa.png" alt="" style="width:70px; height: 70px"></img></td>
+    </tr>
+    <tr>
+      <td> A - Semibreve </td>
+      <td> B - Mínima </td>
+      <td> C - Semínima </td>
+      <td> D - Colcheia </td>
+      <td> E - Semicolcheia </td>
+      <td> F - Fusa </td>
+      <td> G - Semifusa </td>
+      <td> H - Quartifusa </td>
+    </tr>
+    <tr>
+      <td> 1 </td>
+      <td> <sup>1</sup>/<sub>2</sub> </td>
+      <td> <sup>1</sup>/<sub>4</sub> </td>
+      <td> <sup>1</sup>/<sub>8</sub> </td>
+      <td> <sup>1</sup>/<sub>16</sub> </td>
+      <td> <sup>1</sup>/<sub>32</sub> </td>
+      <td> <sup>1</sup>/<sub>64</sub> </td>
+      <td> <sup>1</sup>/<sub>128</sub> </td>
+    </tr>
+  </tbody>
+</table>
+</center><!--}}}-->
+
+<p> (Se você precisar de ajuda em relação a notação musical usada neste laboratório,
+<a href="http://goo.gl/e7gxOv" target="_blank">veja esse link</a>.) </p>
+
+<p> Um <i>compasso</i> é uma forma de dividir quantitativamente em grupos os
+sons de uma composição musical. Compassos são divididos na partitura a partir de
+linhas verticais desenhadas sobre a pauta. A soma dos valores temporais das
+notas dentro dos compassos de uma mesma composição deve ser sempre a mesma. </p>
+
+<p> No código utilizado por Richard, cada nota é representada com uma letra
+maiúscula do alfabeto, conforme mostrado na tabela acima. O método de Richard
+envolve escrever <tt>N</tt> linhas, onde <tt>N</tt> é o número de dígitos de sua
+nova senha, com cada linha contendo um compasso que pode ser <i>válido</i> ou
+<i>inválido</i>. Um compasso é válido se sua soma de tempo for 1 e inválido
+caso contrário. Se a <tt>i</tt>-ésima linha possui um compasso válido, então o
+<tt>i</tt>-ésimo dígito da senha é o número de caracteres existentes em tal
+compasso. Caso contrário, o <tt>i</tt>-ésimo dígito da senha é 0. </p>
+
+<p> Considere, por exemplo, o código da senha mais recente de Richard:
+<code>
+  <br> &nbsp; &nbsp; &nbsp; AA
+  <br> &nbsp; &nbsp; &nbsp; CCB
+  <br> &nbsp; &nbsp; &nbsp; DDA
+  <br> &nbsp; &nbsp; &nbsp; A
+  <br> &nbsp; &nbsp; &nbsp; FFGGGF
+</code> <br>
+Note que apenas os compassos <tt>CCB</tt> e <tt>A</tt> são válidos. Portanto, a
+senha é 03010. </p>
+
+<p> Só existe um pequeno problema: Richard tem demorado muito na fila do banco
+enquanto calcula a senha. E isso acontece todas as vezes! Por isso, ele pediu
+a sua ajuda, pois você é o melhor amigo dele, para desenvolver um programa que,
+dado o código da senha atual, retorne a senha. </p>
+
+<h3> Entrada </h3>
+
+<ul>
+  <li> A entrada é composta por várias linhas com no máximo 9 caracteres cada
+  dentre <tt>A,B,C,D,E,F,G</tt> e <tt>H</tt>.
+  </li>
+  <li> A última linha contém um único caractere <tt>*</tt>, indicando o fim da
+  leitura.
+  </li>
+</ul>
+
+<h3> Saída </h3>
+
+<ul>
+  <li> Você deve imprimir uma única linha contendo a senha de Richard.
+  </li>
+</ul>
+
+<h3> Exemplos </h3>
+
+<table style="font-family: monospace; text-align: left; font-size: 14px"
+        border="1" cellpadding="4" cellspacing="0">
+  <tbody>
+    <tr align="center">
+      <td> <b><em> # </em></b> </td>
+      <td> <b><em> Entrada </em></b> </td>
+      <td> <b><em> Saída </em></b> </td>
+    </tr>
+    <tr valign="top">
+      <td> 1 </td>
+      <td>
+        AA<br>
+        CCB<br>
+        DDA<br>
+        A<br>
+        FFGGGF<br>
+        *<br>
+      </td>
+      <td>
+        03010
+      </td>
+    </tr>
+    <tr valign="top">
+      <td> 2 </td>
+      <td>
+        DFDCDCFE<br>
+        BGHFFEBE<br>
+        DEBEC<br>
+        EGBFEGAAB<br>
+        BBGBHF<br>
+        GDGEHCHBG<br>
+        DDBC<br>
+        A<br>
+        BB<br>
+        BB<br>
+        ACAAD<br>
+        HGEAAEEH<br>
+        EGDFCGB<br>
+        *<br>
+      </td>
+      <td>
+        8050094122007
+      </td>
+    </tr>
+    <tr valign="top">
+      <td> 3 </td>
+      <td>
+        H<br>
+        DDBC<br>
+        EDGCGBF<br>
+        DBCD<br>
+        ECBED<br>
+        FBCGDFGF<br>
+        FCDEFB<br>
+        A<br>
+        BB<br>
+        BCC<br>
+        GGCCDCEF<br>
+        DCDB<br>
+        EEBGDEGFD<br>
+        DCHFBAEFF<br>
+        *<br>
+      </td>
+      <td>
+        04745861238490
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br> <br>
+
+</body>
+
+</html>

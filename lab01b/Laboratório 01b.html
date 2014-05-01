@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+        
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Laborat&oacute;rio 01b</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programa&ccedil;&atilde;o de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computa&ccedil;&atilde;o - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e Jos&eacute; Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 01b - Notas do vestibular</h2>
+
+<b> <em> Prazo de entrega: </em> </b> 17/03/2014 &agrave;s 13h59min59s <br>
+<b> <em> Peso: </em> </b> 1 <br> <br> <hr> <br>
+
+<p align="justify">
+At&eacute; 1986, o vestibular para admiss&atilde;o de novos alunos para a UNICAMP era realizado pelo mesmo &oacute;rg&atilde;o que elabora o vestibular da USP, a FUVEST. Em 1987 foi realizado o primeiro vestibular da UNICAMP pelo novo &oacute;rg&atilde;o respons&aacute;vel: a COMVEST. Conhecido pela primeira fase inteiramente com perguntas dissertativas e uma reda&ccedil;&atilde;o, al&eacute;m do c&aacute;lculo nada comum para as notas finais, o vestibular da COMVEST passou por uma nova reformula&ccedil;&atilde;o no ano de 2011, quando a primeira fase voltou a contar com quest&otilde;es de m&uacute;ltipla escolha e tr&ecirc;s reda&ccedil;&otilde;es, e a segunda fase agrupou as mat&eacute;rias Hist&oacute;ria, Geografia, Sociologia e Artes em "Ci&ecirc;ncias Humanas" e as mat&eacute;rias Qu&iacute;mica, F&iacute;sica e Biologia em "Ci&ecirc;ncias da Natureza".</p>
+<p align="justify">
+Voc&ecirc; passou no processo seletivo para estagi&aacute;rio da COMVEST e, como teste de suas habilidades em programa&ccedil;&atilde;o, foi solicitado um programa que, dadas as notas das provas de um candidato, calcule as m&eacute;dias da primeira e da segunda fase dele e determine em qual grupo de classifica&ccedil;&atilde;o ele ficou.
+</p>
+<p align="justify">
+Seu programa deve implementar as seguintes regras:
+<ul>
+<li>A nota padronizada de uma prova, NP, considera os pontos obtidos pelo candidato na prova, N, a m&eacute;dia dentre todos os candidatos nesta prova, M, e o desvio padr&atilde;o desta prova, DP. A f&oacute;rmula da nota padronizada &eacute; exibida abaixo: </li><br>
+<ul>
+<img alt="" src="formula.jpg">
+</ul>
+<li>Um candidato &eacute; aprovado para a segunda fase se sua nota padronizada da primeira fase (Conhecimentos Gerais e Reda&ccedil;&atilde;o), denominada <tt>NP<sub>CG</sub></tt>, for maior ou igual &agrave; 550. Em seu programa, n&atilde;o &eacute; necess&aacute;rio considerar o n&uacute;mero de candidatos por vaga aprovados na segunda fase.</li>
+<li>A nota final <tt>NF</tt>, para um candidato que foi aprovado para a segunda fase, &eacute; a m&eacute;dia aritm&eacute;tica ponderada de todas as notas padronizadas das provas feitas por ele. As provas do vestibular e suas siglas s&atilde;o as seguintes:</li>
+<ul><br>
+<table border="1" bordercolor="#000000" cellpadding="2" cellspacing="0">
+	<tr align='center'>
+		<td><b>Sigla</b></td>
+		<td><b>Prova</b></td>
+	</tr  align='center'>
+	<tr align='center'>
+		<td>CG</td>
+		<td>Conhecimentos Gerais e Reda&ccedil;&atilde;o (1&ordf; fase)</td>
+	</tr>
+	<tr align='center'>
+		<td>IN</td>
+		<td>L&iacute;ngua Inglesa</td>
+	</tr>
+	<tr align='center'>
+		<td>PO</td>
+		<td>L&iacute;ngua Portuguesa</td>
+	</tr>
+	<tr align='center'>
+		<td>MA</td>
+		<td>Matem&aacute;tica</td>
+	</tr>
+	<tr align='center'>
+		<td>CH</td>
+		<td>Ci&ecirc;ncias Humanas e Artes</td>
+	</tr>
+	<tr align='center'>
+		<td>CN</td>
+		<td>Ci&ecirc;ncias da Natureza</td>
+	</tr>
+</table><br>
+</ul>
+<li>Exemplo do c&aacute;lculo das notas padronizadas das provas de um candidato ao curso de Engenharia de Computa&ccedil;&atilde;o:</li>
+<ul><br>
+<table border="1" bordercolor="#000000" cellpadding="2" cellspacing="0">
+	<tr align='center'>
+		<td><b></b></td>
+		<td><b><tt>CG</tt></b></td>
+		<td><b><tt>IN</tt></b></td>
+		<td><b><tt>PO</tt></b></td>
+		<td><b><tt>MA</tt></b></td>
+		<td><b><tt>CH</tt></b></td>
+		<td><b><tt>CN</tt></b></td>
+	</tr>
+	<tr align='center'>
+		<td><b>N</b></td>
+		<td><b><tt>57.6</tt></b></td>
+		<td><b><tt>22.1</tt></b></td>
+		<td><b><tt>18.3</tt></b></td>
+		<td><b><tt>25.4</tt></b></td>
+		<td><b><tt>19.1</tt></b></td>
+		<td><b><tt>23.8</tt></b></td>
+	</tr>
+	<tr align='center'>
+		<td><b>M</b></td>
+		<td><b><tt>50.5</tt></b></td>
+		<td><b><tt>19.5</tt></b></td>
+		<td><b><tt>16.5</tt></b></td>
+		<td><b><tt>18.0</tt></b></td>
+		<td><b><tt>19.5</tt></b></td>
+		<td><b><tt>21.5</tt></b></td>
+	</tr>
+	<tr align='center'>
+		<td><b>DP</b></td>
+		<td><b><tt>8.5</tt></b></td>
+		<td><b><tt>7.5</tt></b></td>
+		<td><b><tt>6.0</tt></b></td>
+		<td><b><tt>10.5</tt></b></td>
+		<td><b><tt>4.0</tt></b></td>
+		<td><b><tt>5.5</tt></b></td>
+	</tr>
+	<tr align='center'>
+		<td><b>NP</b></td>
+		<td><b><tt>583.53</tt></b></td>
+		<td><b><tt>534.67</tt></b></td>
+		<td><b><tt>530.00</tt></b></td>
+		<td><b><tt>570.48</tt></b></td>
+		<td><b><tt>490.00</tt></b></td>
+		<td><b><tt>541.82</tt></b></td>
+	</tr>
+	<tr align='center'>
+		<td><b>Peso</b></td>
+		<td><b><tt>2</tt></b></td>
+		<td><b><tt>0.5</tt></b></td>
+		<td><b><tt>1</tt></b></td>
+		<td><b><tt>3</tt></b></td>
+		<td><b><tt>2</tt></b></td>
+		<td><b><tt>3</tt></b></td>
+	</tr>
+</table><br>
+<li>As notas padronizadas <tt>NP</tt> de cada prova s&atilde;o calculadas seguindo a f&oacute;rmula acima.</li>
+<li>O peso de cada prova no c&aacute;lculo da nota final <tt>NF</tt> &eacute; espec&iacute;fico para cada curso. No caso do curso de Engenharia da Computa&ccedil;&atilde;o, os pesos de cada prova est&atilde;o dados na tabela acima.</li>
+<li>Assim, a nota final do candidato &eacute; <tt>NF = (2*583.53 + 0.5*534.67 + 1*530.00 + 3*570.48 + 2*490.00 + 3*541.82)/(2+0.5+1+3+2+3) = 546.2</tt>.<br><br>
+</ul>
+
+<li>Outra peculiaridade do vestibular da UNICAMP &eacute; a classifica&ccedil;&atilde;o dos candidatos em dois grupos, 1 e 2, onde s&atilde;o convocados para matr&iacute;cula primeiramente os candidatos do Grupo 1 e, se restarem vagas e todos os candidados do Grupo 1 j&aacute; foram convocados, inicia-se a convoca&ccedil;&atilde;o dos candidatos do Grupo 2. Para seu programa, suponha que o grupo de classifica&ccedil;&atilde;o considera a &aacute;rea do curso que o candidato optou como primeira op&ccedil;&atilde;o. As provas associadas a cada &aacute;rea est&atilde;o na tabela abaixo. O candidato &eacute; classificado no Grupo 1 se suas notas padronizadas das provas associadas &agrave; sua &aacute;rea for maior ou igual &agrave; nota m&iacute;nima de op&ccedil;&atilde;o, denominada <tt>NMO</tt>. Caso contr&aacute;rio, ele &eacute; classificado no Grupo 2. Por exemplo, o curso de Engenharia de Computa&ccedil;&atilde;o possui <tt>NMO = 550</tt>, e as provas associadas s&atilde;o Matem&aacute;tica e Ci&ecirc;ncias da Natureza. Tomando como exemplo o candidato dado acima, temos que <tt>NP<sub>MA</sub> = 570.48</tt> e <tt>NP<sub>CN</sub> = 541.82</tt>. Desta forma, ele ser&aacute; classificado no Grupo 2, uma vez que a nota da prova de Ci&ecirc;ncias da Natureza &eacute; menor que a <tt>NMO</tt>.  A tabela abaixo mostra as provas associadas a cada &aacute;rea de conhecimento:</li>
+<ul><br>
+<table border="1" bordercolor="#000000" cellpadding="2" cellspacing="0">
+	<tr align='center'>
+		<td><b>C&oacute;digo</b></td>
+		<td><b>&Aacute;rea</b></td>
+		<td><b>Provas associadas</b></td>
+	</tr  align='center'>
+	<tr align='center'>
+		<td>1</td>
+		<td>Exatas</td>
+		<td>Matem&aacute;tica e Ci&ecirc;ncias da Natureza</td>
+	</tr>
+	<tr align='center'>
+		<td>2</td>
+		<td>Humanas</td>
+		<td>L&iacute;ngua Portuguesa e Ci&ecirc;ncias Humanas e Artes</td>
+	</tr>
+	<tr align='center'>
+		<td>3</td>
+		<td>Biol&oacute;gicas</td>
+		<td>Ci&ecirc;ncias da Natureza</td>
+	</tr>
+</table><br>
+</ul>
+</ul>
+</p>
+
+<h3> Entrada </h3>
+<ul>
+<li> O programa recebe inicialmente dois numeros inteiros e nove n&uacute;meros reais, na seguinte ordem:
+<ul><tt>A NMO</tt><br><tt>P<sub>CG</sub> P<sub>IN</sub> P<sub>PO</sub> P<sub>MA</sub> P<sub>CH</sub> P<sub>CN</sub></tt><br><tt>N<sub>CG</sub> M<sub>CG</sub> DP<sub>CG</sub></tt></ul>
+onde:
+<ul>
+<li><tt>A &in; [1,2,3]</tt> representa o c&oacute;digo da &aacute;rea do curso de primeira op&ccedil;&atilde;o do candidato;</li>
+<li><tt>NMO</tt> &eacute; a nota m&iacute;nima de op&ccedil;&atilde;o nas provas associadas &agrave; &aacute;rea <tt>A</tt> do candidato, onde <tt>350 &le; NMO &le; 550</tt>;</li>
+<li><tt>P<sub>i</sub></tt> &eacute; o peso associado &agrave; prova cuja sigla &eacute; <tt>i</tt> no c&aacute;lculo da m&eacute;dia ponderada <tt>NF</tt>, com <tt>0.5 &le; P<sub>i</sub> &le; 3.0</tt>;</li>
+<li><tt>N<sub>CG</sub>, M<sub>CG</sub>, DP<sub>CG</sub></tt> , representam a nota do candidato, a m&eacute;dia dentre todos os candidatos e o desvio padr&atilde;o da prova da primeira fase, respectivamente. Considere que <tt>0.0 &le; N<sub>CG</sub>, M<sub>CG</sub> &le; 96.0</tt> e <tt> 0.0 <  DP<sub>CG</sub> &le; 96.0</tt>.</li><br>
+</ul>
+</li>
+
+<li>Se o candidato passou para a segunda fase, o programa deve receber ainda as notas, m&eacute;dias e desvios das provas da segunda fase, na seguinte ordem:
+<ul>
+<tt>N<sub>IN</sub> M<sub>IN</sub> DP<sub>IN</sub></tt><br>
+<tt>N<sub>PO</sub> M<sub>PO</sub> DP<sub>PO</sub></tt><br>
+<tt>N<sub>MA</sub> M<sub>MA</sub> DP<sub>MA</sub></tt><br>
+<tt>N<sub>CH</sub> M<sub>CH</sub> DP<sub>CH</sub></tt><br>
+<tt>N<sub>CN</sub> M<sub>CN</sub> DP<sub>CN</sub></tt><br>
+</ul>
+onde:
+<ul>
+<li><tt>N<sub>K</sub> M<sub>K</sub> e DP<sub>K</sub> </tt> representa a nota do candidato, a m&eacute;dia e o desvio padr&atilde;o da prova cuja sigla &eacute; <tt>K</tt>, respectivamente. Todos os valores s&atilde;o n&uacute;meros reais, com <tt>0.0 &le; N<sub>i</sub>,M<sub>i</sub> &le; 48.0</tt> e <tt>0.0 < DP<sub>i</sub> &le; 48.0</tt>.</li>
+</ul></li>
+</ul>
+<h3>Sa&iacute;da</h3>
+<ul>
+<li>Seu programa deve imprimir a nota do candidato na primeira fase no seguinte formato: "<tt>Primeira Fase: X</tt>", onde <tt>X = NP<sub>CG</sub></tt>, formatada com uma casa decimal.</li>
+<li>Se o candidato passou para a segunda fase, seu programa deve imprimir tamb&eacute;m:
+<ul>
+<li>a nota final no seguinte formato: "<tt>Segunda Fase: Y</tt>", onde <tt>Y = NF</tt>, formatada com uma casa decimal.</li>
+<li>o grupo em que o candidato ficou, no seguinte formato: "<tt>Grupo Z</tt>", onde <tt>Z &in; [1,2]</tt> de acordo com as notas das provas associadas a &aacute;rea do candidato.</li>
+</ul>
+</li>
+</ul>
+<h3>Exemplos</h3>
+<table cellpadding='2' cellspacing='0' border='1'>
+<tr align='center'><td width='15px'><b><tt>#</tt></b></td><td width='150px'><b><tt>Entrada</tt></b></td><td width='180px'><b><tt>Sa&iacute;da</tt></b></td></tr>
+<tr align='left' valign='top'><td>1</td><td><tt>1 550<br>2 0.5 1 3 2 3<br>57.6 50.5 8.5<br>22.1 19.5 7.5<br>18.3 16.5 6.0<br>25.4 18.0 10.5<br>19.1 19.5 4.0<br>23.8 21.5 5.5</tt></td><td><tt>Primeira Fase: 583.5<br>Segunda Fase: 546.2<br>Grupo 2</tt></td></tr>
+<tr align='left' valign='top'><td>2</td><td><tt>3 500<br>2 0.5 1 1 2 3<br>22.1 19.0 5.5<br>17.7 16.5 12.0<br>27.3 16.5 11.0<br>11.1 15.5 7.5<br>13.3 13.5 5.5<br>20.3 18.5 7.5</tt></td><td><tt>Primeira Fase: 556.4<br>Segunda Fase: 523.4<br>Grupo 1</tt></td></tr>
+<tr align='left' valign='top'><td>3</td><td><tt>3 500<br>2 0.5 1 1 2 3<br>27.1 25.5 6.5</tt></td><td><tt>Primeira Fase: 524.6</tt></td></tr>
+</table><br>
+</body></html>

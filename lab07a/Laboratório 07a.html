@@ -1,0 +1,98 @@
+<html>
+        
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Laborat&oacute;rio 07a</title>
+</head>
+          
+<body style="text-align: justify"> 
+        
+<em> <b> MC102: Algoritmos e Programa&ccedil;&atilde;o de Computadores </b> </em> <br>
+<em> <b> Turmas QRST </b> </em> <br>
+<em> <b> Instituto de Computa&ccedil;&atilde;o - Unicamp </b> </em> <br>
+<em> <b> Docente: </b> Zanoni Dias </em> <br>
+<em> <b> Monitores: </b> Andre Rodrigues Oliveira, Carla Negri Lintzmayer,
+      Carolina Regattieri Delgado, Filipe de Oliveira Costa e Jos&eacute; Ernesto
+      Stelzer Monar </em>
+
+<br> <br> <hr>
+<h2> Lab 07a - The Voice - Blind Auditions</h2>
+
+<b> <em> Prazo de entrega: </em> </b> 28/04/2014 &agrave;s 13h59min59s <br>
+<b> <em> Peso: </em> </b> 5 <br> <br> <hr> <br>
+
+<p align="justify">
+The Voice &eacute; uma famosa franquia de reality musical. Originalmente criado pelo produtor de televis&atilde;o holand&ecirc;s John de Mol, e baseado no reality da Holanda em 2010, com o t&iacute;tulo "The Voice of Holland", a franquia tornou-se famosa em 2011 com a cria&ccedil;&atilde;o da vers&atilde;o americana, cujo t&iacute;tulo &eacute; apenas "The Voice". Atualmente, existem mais de 45 formatos do reality em diferentes pa&iacute;ses, incluindo o Brasil.
+</p>
+
+<p align="justify">O reality conta com quatro treinadores e possui 4 fases:
+<ul>
+<li>a chamada "blind auditions", onde os participantes se apresentam e os treinadores formam seus times;</li>
+<li>a chamada "battle round", onde cada time forma duplas entre seus participantes, que posteriormente se apresentam e, ao final, o treinador deve eliminar um de cada dupla;</li>
+<li> a chamada "knockout round", onde os treinadores diminuem o tamanho de seus times pela metade;</li>
+<li>e a &uacute;ltima fase, chamada "live performances", onde os participantes que passaram pela fase anterior se apresentam e o p&uacute;blico decide quem ser&aacute; o ganhador.</li>
+</ul>
+</p>
+
+<p align="justify">A "blind auditions" funciona da seguinte forma: os participantes se apresentam no palco e os quatro treinadores ficam de costas para ele. Se a voz do participante agradar um treinador, ele aperta um bot&atilde;o, mostrando que ele deseja aquele participante em seu time. Quando ele aperta o bot&atilde;o sua cadeira gira 180&deg;, e somente ent&atilde;o ele consegue ver as caracter&iacute;sticas f&iacute;sicas do participante.
+</p>
+
+<div style="text-align: center;"><img style="width: 578px; height: 395px;" alt="" src="blindauditions.jpg"><br>
+<i>Participante se apresentando na Blind Auditions, no The Voice (USA). Os treinadores Blake, Christina, CeeLo e Adam inicialmente ficam de costas para ela.</i></div>
+
+
+<p align="justify">Nesta primeira fase a regra &eacute; a seguinte: se nenhuma cadeira virar at&eacute; o final da m&uacute;sica, ou seja, nenhum treinador pressionar o bot&atilde;o, o participante n&atilde;o entra para nenhum time, e consequentemente n&atilde;o passa para a fase seguinte. Se apenas um treinador virar sua cadeira, o participante entra automaticamente para seu time. Se dois ou mais treinadores viraram, o participante deve escolher, levando em considera&ccedil;&atilde;o suas prefer&ecirc;ncias pessoais, para qual time deseja ir.
+</p>
+
+<p align="justify">
+A produtora resolveu contratar voc&ecirc; para trabalhar na equipe de TI devido &agrave; novidade reservada para a pr&oacute;xima temporada: agora, antes de entrar no palco, os participantes devem dizer explicitamente suas prefer&ecirc;ncias de treinadores. Sua tarefa &eacute; criar um programa para, ao final das audi&ccedil;&otilde;es desta fase, retornar os quatro times montados. Suponha que os times n&atilde;o possuem limite m&aacute;ximo de participantes. Considere tamb&eacute;m a possibilidade de um time n&atilde;o possuir nenhum participante ao final da "blind auditions". Os times s&atilde;o identificados por n&uacute;meros, onde Time 1 &eacute; o time do treinador Blake Shelton, Time 2 &eacute; o time da treinadora Christina Aguilera, Time 3 &eacute; o time do treinador CeeLo Green e Time 4 &eacute; o time do treinador Adam Levine.
+</p>
+
+
+<h3> Entrada </h3>
+<ul>
+<li> O programa recebe inicialmente um valor inteiro <tt>N</tt>, que representa o n&uacute;mero de participantes do reality (<tt>1 &le; N &le; 100</tt>).</li>
+
+<li>As <tt>N</tt> linhas seguintes possuem a seguinte estrutura: <tt>C<sub>1</sub> C<sub>2</sub> C<sub>3</sub> C<sub>4</sub> P<sub>a</sub> P<sub>b</sub> P<sub>c</sub> P<sub>d</sub></tt>, onde</li>
+<ul>
+<li>A <tt>i-</tt>&eacute;sima linha corresponde ao n&uacute;mero identificador (ID) daquele participante no reality, <tt>1 &le; i &le; N</tt>.</li>
+<li><tt>C<sub>J</sub> &in; [0,1]</tt> possui a informa&ccedil;&atilde;o da cadeira do treinador do Time <tt>J, 1 &le; J &le; 4</tt>. Uma cadeira girou se seu valor for <tt>'1'(TRUE)</tt>, e n&atilde;o girou se for <tt>'0'(FALSE)</tt>.</li>
+<li><tt>P<sub>x</sub> &in; [1,2,3,4]</tt> indica as prefer&ecirc;ncias de times do participante, em ordem decrescente. Por exemplo, suponha que a lista de prefer&ecirc;ncias de um participante &eacute; 4 2 1 3. Se os treinadores dos times 2 e 4 girarem suas cadeiras, o  participante vai automaticamente para o Time 4. Se os treinadores dos times 1, 2 e 3 girarem, ent&atilde;o o participante vai automaticamente para o Time 2.<br /></li>
+</ul>
+</ul>
+<h3>Sa&iacute;da</h3>
+<ul>
+<li> Seu programa deve imprimir os 4 times formados, em ordem crescente, com todos os ID's dos participantes de um time tamb&eacute;m em ordem crescente.</li>
+<li>Para cada time, voc&ecirc; deve imprimir uma linha com o texto "<tt>Time X:</tt>", onde <tt>X</tt> &eacute; o n&uacute;mero do time, seguido dos ID's de todos participantes deste time separados por um espa&ccedil;o em branco. Se o time ficou sem participantes, imprima "<tt>Nenhum participante</tt>".</li>
+</ul>
+<h3>Exemplos</h3>
+<table cellpadding='2' cellspacing='0' border='1'>
+<tr align='center' valign='top'><td width='15px'><tt><b>#</b></tt></td><td width='150px'><tt><b>Entrada</b></tt></td><td width='230px'><tt><b>Sa&iacute;da</b></tt></td></tr>
+<tr align='left' valign='top'><td>1</td><td><tt>20<br>
+0 0 0 0 1 3 4 2<br>
+0 1 0 0 3 4 1 2<br>
+0 0 0 1 3 2 4 1<br>
+0 1 1 1 1 3 2 4<br>
+0 0 0 0 3 2 1 4<br>
+1 1 1 1 4 1 2 3<br>
+1 0 1 0 2 3 1 4<br>
+0 1 1 0 2 3 1 4<br>
+0 0 1 1 2 1 3 4<br>
+0 1 0 0 4 3 1 2<br>
+1 1 1 1 4 2 1 3<br>
+1 0 0 0 3 2 1 4<br>
+0 1 0 1 2 1 3 4<br>
+0 1 1 1 1 2 3 4<br>
+0 0 0 0 2 3 1 4<br>
+0 0 0 1 3 2 1 4<br>
+0 0 0 0 2 3 1 4<br>
+0 0 1 0 2 3 1 4<br>
+1 1 1 1 3 2 4 1<br>
+0 1 1 0 4 1 3 2
+</tt></td><td valgin='top'><tt>Time 1: 12<br>Time 2: 2 8 10 13 14<br>Time 3: 4 7 9 18 19 20<br>Time 4: 3 6 11 16<br></tt></td></tr>
+<tr align='left' valign='top'><td>2</td><td><tt>10<br>1 1 1 1 3 2 4 1<br>1 1 1 0 3 4 1 2<br>1 1 0 1 2 3 1 4<br>0 0 0 0 4 2 3 1<br>1 0 1 0 2 1 4 3<br>0 1 0 1 3 4 2 1<br>0 1 1 1 1 2 3 4<br>0 0 0 0 2 3 4 1<br>0 0 1 1 1 4 2 3<br>0 0 0 1 2 1 3 4</tt></td><td valgin='top'><tt>Time 1: 5<br>Time 2: 3 7<br>Time 3: 1 2<br>Time 4: 6 9 10<br></tt></td></tr>
+<tr align='left' valign='top'><td>3</td><td><tt>12<br>0 0 0 0 3 2 1 4<br>0 0 0 0 2 3 4 1<br>0 0 0 0 1 2 3 4<br>0 0 0 0 3 1 4 2<br>0 0 0 0 2 3 4 1<br>0 0 0 0 4 1 3 2<br>0 0 0 0 3 4 1 2<br>0 0 0 0 4 1 2 3<br>0 0 0 0 3 4 1 2<br>0 0 0 0 1 3 2 4<br>0 0 0 0 2 1 3 4<br>0 0 0 0 2 4 1 3
+</tt></td><td valgin='top'><tt>Time 1: Nenhum participante<br>Time 2: Nenhum participante<br>Time 3: Nenhum participante<br>Time 4: Nenhum participante<br></tt></td></tr>
+</table>
+<br>
+</body></html>
