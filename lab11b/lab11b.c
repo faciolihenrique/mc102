@@ -1,6 +1,6 @@
 /* Henrique Noronha Facioli
  * RA : 157986
- * 
+ * Lab 11b - BibTeX
  */
 
 #include <stdio.h>
@@ -17,6 +17,7 @@ struct Campos{
     char volume[51];
     char number[51];
     char page[51];
+    int preferencia;
 };
 typedef struct Campos Campos;
 
@@ -26,27 +27,35 @@ void leitura_article(Campos articles[], int num);
 int leitura_linha_article(Campos articles[], int num);
 int buscar_letra(char vetor[], char letra);
 void ordenacao(Campos articles[], int N);
+void impressao(Campos articles[], int i);
+void zerar_vetor(Campos articles[], int N);
 
 /*Bloco princial*/
 int main(){
     /*Declaracao variavel*/
     Campos *articles;
     int n;
-    int i = 0;
+    int i;
     /*Leitura do numero de articles fonecidos*/
     n = leitura_numero_articles();
     /*Alocacao dinamica do numero n de articles*/
     articles = malloc(n*sizeof(Campos));
     
+    zerar_vetor(articles, n);
+    
+    /*Leitura do texto fornecido*/
     for(i = 0; i < n; i++){
-    leitura_article(articles, i);
+        leitura_article(articles, i);
     }
     
+    /*Ordena o veor ja lido*/
     ordenacao(articles, n);
     
-    /*impressao somente para teste, mudar depois*/
+    
+    /*Impressao da bibliografia de modo odenado*/
     for(i = 0 ; i < n; i++){
-    printf("%s %s %s %s %s %s %s\n\n", articles[i].title, articles[i].author, articles[i].journal, articles[i].volume, articles[i].number ,articles[i].page , articles[i].year);
+
+       impressao(articles , i);
     }
     
     free(articles);
@@ -64,11 +73,44 @@ int leitura_numero_articles(){
     return N;
 }
 
+/*Zerar*/
+/* Coloca em toda primeira posicao \0, para diferenciar dos campos usados*/
+void zerar_vetor(Campos articles[], int N){
+    int i;
+    for(i = 0; i < N; i++){
+        articles[i].title[0] = '\0';
+        articles[i].author[0] = '\0';
+        articles[i].journal[0] = '\0';
+        articles[i].volume[0] = '\0';
+        articles[i].number[0] = '\0';
+        articles[i].page[0] = '\0';
+        articles[i].year[0] = '\0';
+    }
+
+}
+
+/*Leitura de cada article*/
+/*Le cada linha enquanto não chegar ao final do articles(retorno 0)
+ */
+void leitura_article(Campos articles[], int num){
+    int linha = 1;
+    /*Pegar o pulo de linha(\n)*/
+    getchar();
+    /*Define qual é o article lido, somente para caso existam dois iguais*/
+    articles[num].preferencia = num;
+    
+    while(linha != 0){
+        linha = leitura_linha_article(articles, num);
+        
+    }        
+}
+
+/*Leitura de linha*/
 /*Faz a leitura de uma unica linha e procura o que ela contem:
  *Pela primeira letra ele sabe sobre o topico( title, journal...)que 
  *a linha se trata, ja que não existem 2 com o mesmo comeco,
  *A partir dessa informacao, copia para o vetor de Campos a informa-
- *cao contida na linha
+ *cao contida na linha que esta entre '{' e '}'
  */
 int leitura_linha_article(Campos articles[], int num){
     char linha[520];
@@ -115,7 +157,7 @@ int leitura_linha_article(Campos articles[], int num){
             i++;
             j++;
         }
-        articles[num].page[j] = '\0';
+        articles[num].year[j] = '\0';
     }else if(linha[1] == 'v'){
         while(linha[i] != '}'){
             articles[num].volume[j] = linha[i];
@@ -143,34 +185,6 @@ int leitura_linha_article(Campos articles[], int num){
     return 1;
 }
 
-/*Leitura de cada article*/
-/*Le cada linha enquanto não chegar ao final do articles(retorno 0)
- */
-void leitura_article(Campos articles[], int num){
-    int linha = 1;
-    /*Pegar o pulo de linha*/
-    getchar();
-    while(linha != 0){
-        linha = leitura_linha_article(articles, num);
-    }        
-}
-
-/*Zerar*/
-/* Coloca em toda primeira posicao \0, para diferenciar dos campos usados*/
-void zerar_vetor(Campos articles[], int N){
-    int i;
-    for(i = 0; i < N; i++){
-        articles[i].title[0] = '\0';
-        articles[i].author[0] = '\0';
-        articles[i].journal[0] = '\0';
-        articles[i].volume[0] = '\0';
-        articles[i].number[0] = '\0';
-        articles[i].page[0] = '\0';
-        articles[i].year[0] = '\0';
-    }
-
-}
-
 /*Buscas Letra*/
 /*Procura em uma string pela letra desejada, se encontrada,
  *retorna a sua posicao na string*/
@@ -194,6 +208,10 @@ void ordenacao(Campos articles[], int N){
         for(j = i; j < N; j++){
             if(strcmp(articles[maior].title, articles[j].title) > 0){
                 maior = j;
+            }else if(strcmp(articles[maior].title, articles[j].title) == 0){
+                if(articles[maior].preferencia > articles[j].preferencia){
+                    maior = j;
+                }
             }
         }
         if(maior != i){
@@ -204,13 +222,30 @@ void ordenacao(Campos articles[], int N){
     }
 }
 
-/*void impressao(Campos article){
-    if()
-    articles[i].title 
-    articles[i].author
-    articles[i].journal
-    articles[i].volume
-    articles[i].number
-    articles[i].page
-    articles[i].year
-}*/
+/*Funcao para fazer a impressao do modo que foi ordenado,
+ *Somente imprimindo os campos que foram utilizados
+ */
+void impressao(Campos articles[], int i){
+    if(articles[i].title[0] != '\0'){
+        printf("%s", articles[i].title);
+    }
+    if(articles[i].author[0] != '\0'){
+        printf(", %s", articles[i].author);
+    }
+    if(articles[i].journal[0] != '\0'){
+        printf(", %s", articles[i].journal);
+    }
+    if(articles[i].volume[0] != '\0'){
+        printf(", %s", articles[i].volume);
+    }
+    if(articles[i].number[0] != '\0'){
+        printf(", %s", articles[i].number);
+    }
+    if(articles[i].page[0] != '\0'){
+        printf(", %s", articles[i].page);
+    }
+    if(articles[i].year[0] != '\0'){
+        printf(", %s", articles[i].year);
+    }
+    printf(".\n\n");
+}

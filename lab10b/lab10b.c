@@ -30,13 +30,14 @@ void transposicao_prefixo(int pos_i, int pos_j, int vetor[TAM], int n){
 /*Localiza o breakpoint e retorna a posicao em que ele ocorre*/
 int breakpoint(int vetor[TAM], int n){
     int i;
-    for(i = 2; i < n; i++){
+    for(i = 2; i <= n; i++){
         if(vetor[i]-vetor[i-1] != 1){
             return i;
         }
     }
     return 0;
 }
+
 
 void busca_troca(int vetor[TAM], int n, int *pos_i, int *pos_j,int *continuar){
     int a, fim, achou = 0;
@@ -45,9 +46,11 @@ void busca_troca(int vetor[TAM], int n, int *pos_i, int *pos_j,int *continuar){
         if(vetor[a] == vetor[fim-1]+1){
             *pos_i = fim;
             *pos_j = a;
+            achou = 1;
         }else if(vetor[a] == vetor[1]-1){
             *pos_i = fim;
             *pos_j = a+1;
+            achou = 1;
         }
     }
     if(fim == 0){
@@ -63,6 +66,7 @@ int main(){
     
     /*Leitura do numero de panqueas*/
     scanf("%d", &n);
+    
     /*Leitura da pilha de panquecas*/
     permutacao[0] = 0;
     for(a = 1; a <= n; a++){
