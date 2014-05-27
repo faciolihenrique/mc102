@@ -126,7 +126,7 @@ void desaloca_matriz(int **matriz, int linhas) {
 void leitura_linha(FILE *arqCSV, char **valores, int numero_colunas){
     int i, j;
     char letra;
-    for(i = 0; i < numero_colunas; i++){
+        for(i = 0; i < numero_colunas; i++){
         fscanf(arqCSV, "%c", &letra);
         for(j = 0;letra != ',' && letra != '\n'; j++){
             valores[i][j] = letra;
