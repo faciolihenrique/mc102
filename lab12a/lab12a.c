@@ -22,7 +22,7 @@ void leitura_linha(FILE *arqCSV, char **valores, int numero_colunas);
 /*Aloca uma matriz*/
 char ** aloca_matriz(int linhas);
 /*Desaloca uma matriz*/
-void desaloca_matriz(int **matriz, int linhas);
+void desaloca_matriz(char **matriz, int linhas);
 /*Escreve os valores no arquivo*/
 void escrever_arquivo(FILE *arqCSV_out, char **valores, int ordem[], int N);
 
@@ -70,6 +70,8 @@ void gera_csv_reduzido(char fnamein[], char fnameout[]){
         i++;
     }
     
+    desaloca_matriz(valores, ncolums); 
+    
     fclose(arqCSV_out);
     fclose(arqCSV);
     
@@ -111,7 +113,7 @@ char ** aloca_matriz(int linhas) {
     return matriz;
 }
 /*Desalocacao de uma matriz de characteres*/
-void desaloca_matriz(int **matriz, int linhas) {
+void desaloca_matriz(char **matriz, int linhas) {
     int i;
     for (i = 0; i < linhas; i++)
         free(matriz[i]);
