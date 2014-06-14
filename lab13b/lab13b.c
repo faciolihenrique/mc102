@@ -38,11 +38,12 @@ int main(){
     for(cont = 0; cont < jogadas; cont++){
         scanf("%d %d", &i, &j);
         fruta = descobre_fruta(tabuleiro, i, j);
-        zera_contador(&aparicao);
-        jogada(tabuleiro, fruta, i-1, j-1, &aparicao);
-        printf("%d\n", aparicao);
-        gravidade(tabuleiro, linhas, colunas);
-        pontuacao = pontuacao + aparicao*aparicao;
+        if(fruta != -1){
+            zera_contador(&aparwicao);
+            jogada(tabuleiro, fruta, i-1, j-1, &aparicao);
+            gravidade(tabuleiro, linhas, colunas);
+            pontuacao = pontuacao + aparicao*aparicao;
+        }
     }
     
     imprime_tabuleiro(tabuleiro, linhas, pontuacao);
@@ -69,7 +70,12 @@ void imprime_tabuleiro(char tab[][TAM], int linha, int pontuacao){
 
 /*Funcao que retorna qual é a fruta selecionada na jogada*/
 char descobre_fruta(char tab[][TAM], int i, int j){
-    /*Define qual eh a fruta escolhida na jogada*/
+    /*Define qual eh a fruta escolhida na jogada
+     *se ela for gelo ou espaco em branco, retorna-1
+     *senao, retorna ela
+     */
+    if(tab[i-1][j-1] == '.' || tab[i-1][j-1] == '*')
+        return -1;
     return tab[i-1][j-1];
 }
 
