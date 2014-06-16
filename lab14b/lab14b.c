@@ -31,8 +31,6 @@ int main(){
     
     primeira_explosao = tamanho_explosao(mapa, posicao_i-1 , posicao_j-1);
     
-    printf("%d\n", primeira_explosao);
-    
     explosao(mapa, primeira_explosao, posicao_i-1, posicao_j-1, n_linhas, n_colunas);
     
     impressao(mapa, n_linhas, n_colunas, posicao_i, posicao_j);
@@ -76,7 +74,7 @@ void explosao(char mapa[][TAM], int tam_explosao, int pos_i, int pos_j, int tam_
             /*Checa se a explosao ocorre dentro da area do mapa*/
             if((j >= 0) && (j < tam_tab_j) && (i >= 0) && (i < tam_tab_i)){
                 /*Caso a posicao do mapa seja diferente de '.' 'X' 'B' entao ele eh um numero*/
-                if(mapa[i][j] != '.' && mapa[i][j] != 'X' && mapa[i][j] != 'B'){
+                if(mapa[i][j] != '.' && mapa[i][j] != 'x' && mapa[i][j] != 'B'){
                     /*Define qual sera o tamanho da explosao*/
                     tamanho = tamanho_explosao(mapa, i, j);
                     
@@ -86,7 +84,7 @@ void explosao(char mapa[][TAM], int tam_explosao, int pos_i, int pos_j, int tam_
                     /*Faz a explosao ocorrer no local onde foi encontrado outra bomba*/
                     explosao(mapa, tamanho, i, j, tam_tab_i, tam_tab_j);
                 }else if(mapa[i][j] != 'B'){
-                    mapa[i][j] =  'X';
+                    mapa[i][j] =  'x';
                 }
             }
         }
