@@ -1,7 +1,11 @@
-/* Henrique Noronha Facioli
- * RA : 157986
- * Lab XXy - DON'T PANIC - Part I
- */
+/* * * * * * * * * * * * * * * * * *
+ * Henrique Noronha Facioli		    *
+ * RA : 157986				        *
+ * henrique.facioli@gmail.com      *
+ * henrique.facioli@ic.unicamp.br  *
+ * github : henriquefacioli        * 
+ * Lab 10b - DON'T PANIC - PART I  *
+ * * * * * * * * * * * * * * * * * */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,55 +13,10 @@
 #define TAM 102
 
 /*Faz a mudanca da strip de 1 a i-1 movendo ate a posicao j-1*/
-void transposicao_prefixo(int pos_i, int pos_j, int vetor[TAM], int n){
-    int cont ,k , *aux;
-    aux = malloc((pos_j-pos_i) * sizeof(int));
-    /*Faz uma copia dos elementos entre i e j*/
-    for(k = pos_i, cont = 0; k < pos_j ; k++, cont++){
-        aux[cont] = vetor[k];
-    }
-    /*Faz com que os valores do vetor andem j-i casas para a direita*/
-    for(k = pos_j-1; k > pos_j-pos_i; k--){
-        vetor[k] = vetor[k-(pos_j-pos_i)];
-    }
-    /*Faz com que os valores de 1 ate i-j sejam o da matriz aux*/
-    for(k = 1, cont = 0; k <= (pos_j-pos_i); k++, cont++){
-        vetor[k] = aux[cont];
-    }
-    free(aux);
-}
-
+void transposicao_prefixo(int pos_i, int pos_j, int vetor[TAM], int n);
 /*Localiza o breakpoint e retorna a posicao em que ele ocorre*/
-int breakpoint(int vetor[TAM], int n){
-    int i;
-    for(i = 2; i <= n; i++){
-        if(vetor[i]-vetor[i-1] != 1){
-            return i;
-        }
-    }
-    return 0;
-}
-
-
-void busca_troca(int vetor[TAM], int n, int *pos_i, int *pos_j,int *continuar){
-    int a, fim, achou = 0;
-    fim = breakpoint(vetor, n);
-    for(a = fim ; a <= n && !achou && fim ; a++){
-        if(vetor[a] == vetor[fim-1]+1){
-            *pos_i = fim;
-            *pos_j = a;
-            achou = 1;
-        }else if(vetor[a] == vetor[1]-1){
-            *pos_i = fim;
-            *pos_j = a+1;
-            achou = 1;
-        }
-    }
-    if(fim == 0){
-        *continuar = 0;
-    }
-}
-
+int breakpoint(int vetor[TAM], int n);
+void busca_troca(int vetor[TAM], int n, int *pos_i, int *pos_j,int *continuar);
 
 int main(){
     int permutacao[TAM];
@@ -85,4 +44,56 @@ int main(){
     }
     
     return 0;
+}
+
+/*Faz a mudanca da strip de 1 a i-1 movendo ate a posicao j-1*/
+void transposicao_prefixo(int pos_i, int pos_j, int vetor[TAM], int n){
+    int cont ,k , *aux;
+    
+    /*Faz um vetor para armazenar os valores de i ate j*/
+    aux = malloc((pos_j-pos_i) * sizeof(int));
+    /*Faz uma copia dos elementos entre i e j*/
+    for(k = pos_i, cont = 0; k < pos_j ; k++, cont++){
+        aux[cont] = vetor[k];
+    }
+    /*Faz com que os valores do vetor andem j-i casas para a direita*/
+    for(k = pos_j-1; k > pos_j-pos_i; k--){
+        vetor[k] = vetor[k-(pos_j-pos_i)];
+    }
+    /*Faz com que os valores de 1 ate i-j sejam o da matriz aux*/
+    for(k = 1, cont = 0; k <= (pos_j-pos_i); k++, cont++){
+        vetor[k] = aux[cont];
+    }
+    free(aux);
+}
+
+
+/*Localiza o breakpoint e retorna a posicao em que ele ocorre*/
+int breakpoint(int vetor[TAM], int n){
+    int i;
+    for(i = 2; i <= n; i++){
+        if(vetor[i]-vetor[i-1] != 1){
+            return i;
+        }
+    }
+    return 0;
+}
+
+void busca_troca(int vetor[TAM], int n, int *pos_i, int *pos_j,int *continuar){
+    int a, fim, achou = 0;
+    fim = breakpoint(vetor, n);
+    for(a = fim ; a <= n && !achou && fim ; a++){
+        if(vetor[a] == vetor[fim-1]+1){
+            *pos_i = fim;
+            *pos_j = a;
+            achou = 1;
+        }else if(vetor[a] == vetor[1]-1){
+            *pos_i = fim;
+            *pos_j = a+1;
+            achou = 1;
+        }
+    }
+    if(fim == 0){
+        *continuar = 0;
+    }
 }
